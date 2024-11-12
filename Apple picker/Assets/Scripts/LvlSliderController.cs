@@ -14,7 +14,7 @@ public class LvlSliderController : MonoBehaviour
     {
         Slider = gameObject.GetComponent<Image>();
         LvlText = Slider.GetComponentInChildren<TextMeshProUGUI>();
-        LvlSpawningTrees = FindObjectOfType<SpawningTreesController>();
+        LvlSpawningTrees = FindFirstObjectByType<SpawningTreesController>();
     }
     public void AddXp(float Xp)
     {

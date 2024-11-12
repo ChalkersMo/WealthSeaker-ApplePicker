@@ -9,10 +9,10 @@ public class Apples : MonoBehaviour
     Animator animator;
     private void Awake()
     {
-        GameControllerScript = FindObjectOfType<GameController>();
+        GameControllerScript = FindFirstObjectByType<GameController>();
         animator = transform.parent.GetComponent<Animator>();
         CAPlayer = transform.parent.GetComponent<ControlerAnimPlayer>();
-        LvlsliderController  = FindObjectOfType<LvlSliderController>();
+        LvlsliderController  = FindFirstObjectByType<LvlSliderController>();
     }
     private void OnTriggerStay(Collider other)
     {

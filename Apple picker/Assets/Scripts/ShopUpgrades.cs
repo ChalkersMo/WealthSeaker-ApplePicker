@@ -23,10 +23,10 @@ public class ShopUpgrades : MonoBehaviour
     Apples ApplesScr;
     private void OnEnable()
     {
-        player = FindObjectOfType<ControlerAnimPlayer>();
-        gameController = FindObjectOfType<GameController>();
-        lvlSliderController = FindObjectOfType<LvlSliderController>();
-        ApplesScr = FindObjectOfType<Apples>();
+        player = FindFirstObjectByType<ControlerAnimPlayer>();
+        gameController = FindFirstObjectByType<GameController>();
+        lvlSliderController = FindFirstObjectByType<LvlSliderController>();
+        ApplesScr = FindFirstObjectByType<Apples>();
 
         SpeedPriceText.text = $"Price: {SpeedPrice}";
         IncomingPriceText.text = $"Price: {IncomingPrice}";

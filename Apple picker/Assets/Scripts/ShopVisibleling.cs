@@ -11,7 +11,7 @@ public class ShopVisibleling : MonoBehaviour
 
     private void Start()
     {
-        CAP = FindObjectOfType<ControlerAnimPlayer>();
+        CAP = FindFirstObjectByType<ControlerAnimPlayer>();
     }
     private void OnTriggerEnter(Collider other)
     {

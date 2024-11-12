@@ -14,7 +14,7 @@ public class AxePickingUp : MonoBehaviour
     [SerializeField] AxeType type;
     private void Awake()
     {
-        PlayerControl =  FindObjectOfType<ControlerAnimPlayer>();
+        PlayerControl = FindFirstObjectByType<ControlerAnimPlayer>();
         AxeHolder = GameObject.Find("AxeHolder");
     }
     private void OnCollisionEnter(Collision collision)

@@ -16,7 +16,7 @@ namespace InsaneSystems.HealthbarsKit
 		void Awake()
 		{
 			health = maxHealth;
-			CAP = FindObjectOfType<ControlerAnimPlayer>();
+			CAP = FindFirstObjectByType<ControlerAnimPlayer>();
 		}
 
 		void Start()

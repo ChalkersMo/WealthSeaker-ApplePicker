@@ -16,7 +16,7 @@ public class Logs : MonoBehaviour
     [SerializeField] LogsType logsType;
     private void Awake()
     {
-        CAP = FindObjectOfType<ControlerAnimPlayer>();
+        CAP = FindFirstObjectByType<ControlerAnimPlayer>();
         AxeHolder = GameObject.Find("AxeHolder");
     }
     private void OnTriggerStay(Collider other)
