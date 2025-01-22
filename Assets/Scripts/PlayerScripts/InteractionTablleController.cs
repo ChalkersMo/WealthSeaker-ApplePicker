@@ -15,9 +15,9 @@ public class InteractionTablleController : MonoBehaviour
     }
     public void ShowTip(string textToShow)
     {
-        interactionEnabled = true;
         interactionTableText.text = textToShow;
         interactionTable.transform.localScale = Vector3.zero;
+        interactionEnabled = true;
         interactionTable.SetActive(true);
         interactionTable.transform.DOScale(1, 1);
     }
