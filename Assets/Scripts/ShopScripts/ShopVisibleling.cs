@@ -3,23 +3,23 @@ using UnityEngine;
 
 public class ShopVisibleling : MonoBehaviour
 {
-    [SerializeField] GameObject ShopCanvas;
-    [SerializeField] GameObject KeyItteracting;
-    [SerializeField] GameObject TPCObj;
-    [SerializeField] ShopUpgrades _ShopUpgrades;
-    ControlerAnimPlayer CAP;
+    [SerializeField] private GameObject ShopCanvas;
+    [SerializeField] private GameObject TPCObj;
+    [SerializeField] private ShopUpgrades _ShopUpgrades;
+
+    private InteractionTablleController InteractionTable;
+    private ControlerAnimPlayer CAP;
 
     private void Start()
     {
         CAP = FindFirstObjectByType<ControlerAnimPlayer>();
+        InteractionTable = FindFirstObjectByType<InteractionTablleController>();
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            KeyItteracting.SetActive(true);
-            TextMeshPro InteractingText = KeyItteracting.GetComponentInChildren<TextMeshPro>();
-            InteractingText.text = "Press 'E' to shop";
+            InteractionTable.ShowTip("Press 'E' to shop");
         }
     }
     private void OnTriggerStay(Collider other)
@@ -30,7 +30,7 @@ public class ShopVisibleling : MonoBehaviour
             {
                 CAP.Gathering = true;
                 TPCObj.SetActive(false);
-                KeyItteracting.SetActive(false);
+                InteractionTable.CloseTip();
                 ShopCanvas.SetActive(true);
                 _ShopUpgrades.enabled = true;
                 Animator animator = ShopCanvas.GetComponent<Animator>();
@@ -43,7 +43,7 @@ public class ShopVisibleling : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
-            KeyItteracting.SetActive(false);
+            InteractionTable.CloseTip();
     }
 
     public void OffShopCanvas()
@@ -52,7 +52,7 @@ public class ShopVisibleling : MonoBehaviour
         animator.SetBool("On", false);
         CAP.Gathering = false;
         TPCObj.SetActive(true);
-        KeyItteracting.SetActive(true);
+        InteractionTable.ShowTip("Press 'E' to shop");
         ShopCanvas.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
