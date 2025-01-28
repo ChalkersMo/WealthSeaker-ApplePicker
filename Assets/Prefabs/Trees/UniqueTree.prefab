@@ -74,6 +74,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -102,7 +105,7 @@ MeshRenderer:
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!95 &4749162493773993816
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -116,6 +119,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -4966,6 +4970,9 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9854,6 +9861,9 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9977,9 +9987,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd6550cde9929d44af573518befc29a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultApple: {fileID: 3660281835750125310, guid: 81d6efd06380f9f44a2833d3a2fdc154, type: 3}
-  UniqueApple: {fileID: 8276833227754777162, guid: 77d007117a0a3eb49bf6ae9ea35e192f, type: 3}
-  GoldenApple: {fileID: 0}
   BoomEffect: {fileID: 1122574288145186776}
   treeType: 1
 --- !u!1001 &3874946630005396151
@@ -9990,17 +9997,61 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 481256}
     m_Modifications:
+    - target: {fileID: 2362876446969622746, guid: 8fa93941de2926f409a3b5ac33f0f19a, type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2362876446969622746, guid: 8fa93941de2926f409a3b5ac33f0f19a, type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2362876446969622746, guid: 8fa93941de2926f409a3b5ac33f0f19a, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2620142258354506846, guid: 8fa93941de2926f409a3b5ac33f0f19a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809501806823692698, guid: 8fa93941de2926f409a3b5ac33f0f19a, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809501806823692698, guid: 8fa93941de2926f409a3b5ac33f0f19a, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809501806823692698, guid: 8fa93941de2926f409a3b5ac33f0f19a, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809501806823692698, guid: 8fa93941de2926f409a3b5ac33f0f19a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809501806823692698, guid: 8fa93941de2926f409a3b5ac33f0f19a, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 1.0921945e-20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809501806823692698, guid: 8fa93941de2926f409a3b5ac33f0f19a, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 3.67404e-40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809501806823692698, guid: 8fa93941de2926f409a3b5ac33f0f19a, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 1.7589e-41
+      objectReference: {fileID: 0}
     - target: {fileID: 2905215198313832397, guid: 8fa93941de2926f409a3b5ac33f0f19a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.22
       objectReference: {fileID: 0}
     - target: {fileID: 2905215198313832397, guid: 8fa93941de2926f409a3b5ac33f0f19a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.85
+      value: 22.64
       objectReference: {fileID: 0}
     - target: {fileID: 2905215198313832397, guid: 8fa93941de2926f409a3b5ac33f0f19a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.09
+      value: -1.9
       objectReference: {fileID: 0}
     - target: {fileID: 2905215198313832397, guid: 8fa93941de2926f409a3b5ac33f0f19a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10068,19 +10119,19 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpSpecMap:
-        m_Texture: {fileID: 2800000, guid: 39ff80fc53a4ac7458b4b48e151096fc, type: 3}
+        m_Texture: {fileID: 2800000, guid: e268b585afa3d1f45a8435e0bf51b1f9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 711d2299b8663674d8cedf9b23e7c337, type: 3}
+        m_Texture: {fileID: 2800000, guid: 988df512a77f2c347ae02988c5456a45, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ShadowTex:
-        m_Texture: {fileID: 2800000, guid: a8478de6c5f9c64438f79fdb4159cf66, type: 3}
+        m_Texture: {fileID: 2800000, guid: b3fbaa273ccbbfb4bb92d76984279cd7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TranslucencyMap:
-        m_Texture: {fileID: 2800000, guid: d699c944e7fe0cc428b4520ccb31c906, type: 3}
+        m_Texture: {fileID: 2800000, guid: cb4f046669d29704685877d7e046e6a8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -10096,6 +10147,7 @@ Material:
     - _TreeInstanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _TreeInstanceScale: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!21 &2187698
 Material:
   serializedVersion: 8
@@ -10120,15 +10172,15 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpSpecMap:
-        m_Texture: {fileID: 2800000, guid: 4a74146db696c0b4abf41d878dd79fa1, type: 3}
+        m_Texture: {fileID: 2800000, guid: e268b585afa3d1f45a8435e0bf51b1f9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: ba1a405c3e0b391428e95610d5045b5c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 988df512a77f2c347ae02988c5456a45, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TranslucencyMap:
-        m_Texture: {fileID: 2800000, guid: 1df63fd0a01d22e43bb8643bbfea8b48, type: 3}
+        m_Texture: {fileID: 2800000, guid: cb4f046669d29704685877d7e046e6a8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -10141,6 +10193,7 @@ Material:
     - _TreeInstanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _TreeInstanceScale: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!43 &4303498
 Mesh:
   m_ObjectHideFlags: 0
@@ -10308,8 +10361,8 @@ Mesh:
   m_CookingOptions: 30
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
-  m_MeshMetrics[0]: 1
-  m_MeshMetrics[1]: 1
+  'm_MeshMetrics[0]': 1
+  'm_MeshMetrics[1]': 1
   m_MeshOptimizationFlags: 1
   m_StreamData:
     serializedVersion: 2
@@ -10329,7 +10382,7 @@ MonoBehaviour:
   m_Name: Tree Data
   m_EditorClassIdentifier: 
   _uniqueID: 173
-  materialHash: b566958bb5bf32d4ada14b61f6f395e7215482368
+  materialHash: acd4c62ff35a0fd2eb2b300903c4d6a2215482368
   root:
     _uniqueID: 1
     seed: 3000

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TreeZoneTrigging : MonoBehaviour
 {
-    [SerializeField] GameObject SignObj;
-    GameObject Tree;
+    [SerializeField] private GameObject SignObj;
+    private GameObject Tree;
     private void Start()
     {
         Tree = transform.GetChild(0).gameObject;

@@ -3,27 +3,28 @@ using UnityEngine;
 
 public class TreeAppleSpawner : MonoBehaviour
 {
-    [SerializeField] GameObject DefaultApple;
-    [SerializeField] GameObject UniqueApple;
-    [SerializeField] GameObject GoldenApple;
-    [SerializeField] GameObject BoomEffect;
-    Collider Collider;
-    Vector3 minBounds;
-    Vector3 maxBounds;
-    Animator animator;
+    [SerializeField] private GameObject BoomEffect;
 
-    enum TreeType 
+    [SerializeField] private TreeType treeType;
+
+    private ApplePool applePool;
+    private Collider Collider;
+    private Vector3 minBounds;
+    private Vector3 maxBounds;
+    private Animator animator;
+
+    private enum TreeType 
     {
         Default,
         Unique,
         Golden
     }
-    [SerializeField] TreeType treeType;
 
     private void Start()
     {
         Collider = GetComponent<Collider>();
         animator = transform.parent.GetComponent<Animator>();
+        applePool = GetComponent<ApplePool>();
         minBounds = Collider.bounds.min;
         maxBounds = Collider.bounds.max;
 
@@ -41,7 +42,7 @@ public class TreeAppleSpawner : MonoBehaviour
                 break;
             case TreeType.Golden:
                 {
-
+                    StartCoroutine(GoldenSpawner());
                 }
                 break;
 
@@ -63,8 +64,7 @@ public class TreeAppleSpawner : MonoBehaviour
                 float randomY = Random.Range(minBounds.y, maxBounds.y);
                 float randomZ = Random.Range(minBounds.z, maxBounds.z);
                 Vector3 randomPointInsideCollider = new Vector3(randomX, randomY, randomZ);
-                GameObject Apple = Instantiate(DefaultApple);
-                Apple.transform.position = randomPointInsideCollider;
+                Instantiate(applePool.GetApple(randomPointInsideCollider, Quaternion.identity));
             }
         }     
     }
@@ -83,8 +83,7 @@ public class TreeAppleSpawner : MonoBehaviour
                 float randomY = Random.Range(minBounds.y, maxBounds.y);
                 float randomZ = Random.Range(minBounds.z, maxBounds.z);
                 Vector3 randomPointInsideCollider = new Vector3(randomX, randomY, randomZ);
-                GameObject Apple = Instantiate(UniqueApple);
-                Apple.transform.position = randomPointInsideCollider;
+                Instantiate(applePool.GetApple(randomPointInsideCollider, Quaternion.identity));
             }
         }
     }
@@ -93,7 +92,18 @@ public class TreeAppleSpawner : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(60);
+            animator.SetTrigger("Spawning");
+            yield return new WaitForSeconds(1);
+            BoomEffect.SetActive(true);
+            for (int i = 0; i < 1; i++)
+            {
+                float randomX = Random.Range(minBounds.x, maxBounds.x);
+                float randomY = Random.Range(minBounds.y, maxBounds.y);
+                float randomZ = Random.Range(minBounds.z, maxBounds.z);
+                Vector3 randomPointInsideCollider = new Vector3(randomX, randomY, randomZ);
+                Instantiate(applePool.GetApple(randomPointInsideCollider, Quaternion.identity));
+            }
         }
     }
 }
