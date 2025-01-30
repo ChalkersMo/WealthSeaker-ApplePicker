@@ -5662,7 +5662,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1.5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -8728,7 +8728,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 4
     type: 1
     collisionMode: 0
@@ -8901,7 +8901,7 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 8
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
@@ -10276,19 +10276,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2362876446969622746, guid: 8fa93941de2926f409a3b5ac33f0f19a, type: 3}
       propertyPath: ShapeModule.m_Scale.x
-      value: 16
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2362876446969622746, guid: 8fa93941de2926f409a3b5ac33f0f19a, type: 3}
       propertyPath: ShapeModule.m_Scale.y
-      value: 16
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2362876446969622746, guid: 8fa93941de2926f409a3b5ac33f0f19a, type: 3}
       propertyPath: LightsModule.intensity
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2362876446969622746, guid: 8fa93941de2926f409a3b5ac33f0f19a, type: 3}
+      propertyPath: LightsModule.maxLights
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2362876446969622746, guid: 8fa93941de2926f409a3b5ac33f0f19a, type: 3}
       propertyPath: InitialModule.maxNumParticles
-      value: 3000
+      value: 20000
       objectReference: {fileID: 0}
     - target: {fileID: 2362876446969622746, guid: 8fa93941de2926f409a3b5ac33f0f19a, type: 3}
       propertyPath: LightsModule.randomDistribution
@@ -10344,7 +10348,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2905215198313832397, guid: 8fa93941de2926f409a3b5ac33f0f19a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22.64
+      value: 34.9
       objectReference: {fileID: 0}
     - target: {fileID: 2905215198313832397, guid: 8fa93941de2926f409a3b5ac33f0f19a, type: 3}
       propertyPath: m_LocalPosition.z

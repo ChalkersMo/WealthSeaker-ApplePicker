@@ -83,7 +83,7 @@ public class ApplePool : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("This apple is not marked as busy!");
+            ReturnApple(apple);
         }
     }
 }

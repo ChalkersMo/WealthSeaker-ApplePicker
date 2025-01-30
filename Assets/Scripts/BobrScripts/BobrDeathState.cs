@@ -1,16 +1,24 @@
-using UnityEngine;
-
-public class BobrDeathState : MonoBehaviour
+public class BobrDeathState : BobrBaseState
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void EnterState(BobrStateMachine stateMachine)
     {
-        
+        stateMachine.controller.Die();
+        stateMachine.animationController.Death();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnCollisionEnter(BobrStateMachine stateMachine)
     {
-        
+    }
+
+    public override void OnTriggerEnter(BobrStateMachine stateMachine)
+    {
+    }
+
+    public override void OnTriggerExit(BobrStateMachine stateMachine)
+    {
+    }
+
+    public override void UpdateState(BobrStateMachine stateMachine)
+    {
     }
 }

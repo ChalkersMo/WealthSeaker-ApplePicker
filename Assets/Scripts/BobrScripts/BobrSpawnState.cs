@@ -1,19 +1,29 @@
-using UnityEngine;
-
 public class BobrSpawnState : BobrBaseState
 {
     public override void EnterState(BobrStateMachine stateMachine)
     {
-        throw new System.NotImplementedException();
-    }
-
-    public override void ExitStateState(BobrStateMachine stateMachine)
-    {
-        throw new System.NotImplementedException();
+        stateMachine.animationController.StandUpSpeed(1);
     }
 
     public override void UpdateState(BobrStateMachine stateMachine)
     {
-        throw new System.NotImplementedException();
+        if(stateMachine.animationController.IsAnimEnded("StandingUp"))
+        {
+            stateMachine.SwitchState(stateMachine.BobrSeekingState);
+        }
+    }
+
+    public override void OnCollisionEnter(BobrStateMachine stateMachine)
+    {
+
+    }
+
+    public override void OnTriggerEnter(BobrStateMachine stateMachine)
+    {
+
+    }
+
+    public override void OnTriggerExit(BobrStateMachine stateMachine)
+    {
     }
 }

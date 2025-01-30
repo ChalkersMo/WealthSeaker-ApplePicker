@@ -1,8 +1,10 @@
-public class BobrHumilityState : BobrBaseState
+
+
+public class BobrPickUpAppleState : BobrBaseState
 {
     public override void EnterState(BobrStateMachine stateMachine)
     {
-        stateMachine.controller.Wait();
+        stateMachine.controller.PickUpApple(stateMachine.collision.gameObject);
     }
 
     public override void OnCollisionEnter(BobrStateMachine stateMachine)
@@ -11,17 +13,19 @@ public class BobrHumilityState : BobrBaseState
 
     public override void OnTriggerEnter(BobrStateMachine stateMachine)
     {
+        if (stateMachine.other.CompareTag("Player"))
+        {
+            stateMachine.SwitchState(stateMachine.BobrRunAwayState);
+        }
     }
 
     public override void OnTriggerExit(BobrStateMachine stateMachine)
     {
-        if (stateMachine.other.CompareTag("Player"))
-        {
-            stateMachine.SwitchState(stateMachine.BobrSeekingState);
-        }
     }
 
     public override void UpdateState(BobrStateMachine stateMachine)
     {
+        if(stateMachine.animationController.IsAnimEnded("PickingUp"))
+            stateMachine.SwitchState(stateMachine.BobrSeekingState);
     }
 }
