@@ -8,6 +8,7 @@ public class Damageable : MonoBehaviour
     [SerializeField][Range(0.1f, 1000f)] private float maxHealth = 100;
     [SerializeField] private Transform HpSliderParent;
     [SerializeField] private Gradient sliderGradient;
+    [SerializeField] private Color sliderTextColor;
 
     private Image sliderFill;
     private TextMeshProUGUI hpText;
@@ -28,12 +29,14 @@ public class Damageable : MonoBehaviour
         Collider _collider = GetComponent<Collider>();
         float colliderTop = _collider.bounds.center.y + _collider.bounds.extents.y;
         Vector3 healthBarPos = new(transform.position.x, colliderTop + 0.5f, transform.position.z);
-        Instantiate(HpSliderParent, healthBarPos, Quaternion.identity);
+        HpSliderParent = Instantiate(HpSliderParent, healthBarPos, Quaternion.identity, transform);
 
-        sliderFill = HpSliderParent.GetChild(0).GetChild(1).GetComponent<Image>();
+        sliderFill = HpSliderParent.GetChild(0).GetChild(0).GetComponent<Image>();
         sliderFill.DOFillAmount(1, 0);
+        sliderFill.DOColor(sliderGradient.Evaluate(1), 1);
 
-        hpText = HpSliderParent.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>();
+        hpText = HpSliderParent.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
+        //hpText.color = sliderTextColor;
         hpText.text = $"{health}";
         OnHealthChanged();
     }
