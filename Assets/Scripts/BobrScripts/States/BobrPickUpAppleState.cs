@@ -5,6 +5,7 @@ public class BobrPickUpAppleState : BobrBaseState
     public override void EnterState(BobrStateMachine stateMachine)
     {
         stateMachine.controller.PickUpApple(stateMachine.collision.gameObject);
+        stateMachine.animationController.PickUp();
     }
 
     public override void OnCollisionEnter(BobrStateMachine stateMachine)
@@ -25,7 +26,9 @@ public class BobrPickUpAppleState : BobrBaseState
 
     public override void UpdateState(BobrStateMachine stateMachine)
     {
-        if(stateMachine.animationController.IsAnimEnded("PickingUp"))
+        if (stateMachine.animationController.IsAnimEnded("PickingUp"))
+        {
             stateMachine.SwitchState(stateMachine.BobrSeekingState);
+        }
     }
 }

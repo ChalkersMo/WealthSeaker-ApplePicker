@@ -11,11 +11,11 @@ public class BobrStateMachine : MonoBehaviour
     public BobrHumilityState BobrHumilityState = new();
     public BobrDeathState BobrDeathState = new();
 
-    public BobrAnimationController animationController;
-    public BobrController controller;
+    [HideInInspector] public BobrAnimationController animationController;
+    [HideInInspector] public BobrController controller;
 
-    public Collision collision;
-    public Collider other;
+    [HideInInspector] public Collision collision;
+    [HideInInspector] public Collider other;
 
     private void Start()
     {
@@ -29,6 +29,7 @@ public class BobrStateMachine : MonoBehaviour
     private void Update()
     {
         currentState.UpdateState(this);
+        Debug.Log(currentState.ToString());
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -46,6 +47,7 @@ public class BobrStateMachine : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         this.other = other;
+        currentState.OnTriggerExit(this);
     }
 
     public void SwitchState(BobrBaseState state)

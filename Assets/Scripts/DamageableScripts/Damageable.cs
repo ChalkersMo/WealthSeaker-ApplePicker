@@ -26,8 +26,20 @@ public class Damageable : MonoBehaviour
 
     private void AddHealthbarToThisObject()
     {
-        Collider _collider = GetComponent<Collider>();
-        float colliderTop = _collider.bounds.center.y + _collider.bounds.extents.y;
+        BoxCollider[] colliders = GetComponents<BoxCollider>();
+        BoxCollider mainCollider = null;
+
+        foreach (var col in colliders)
+        {
+            if (!col.isTrigger) // Вибираємо НЕ тригерний колайдер
+            {
+                mainCollider = col;
+                break;
+            }
+        }
+
+        float colliderTop = mainCollider.bounds.max.y;
+        colliderTop += (mainCollider.transform.lossyScale.y - 1) * 0.5f;
         Vector3 healthBarPos = new(transform.position.x, colliderTop + 0.5f, transform.position.z);
         HpSliderParent = Instantiate(HpSliderParent, healthBarPos, Quaternion.identity, transform);
 

@@ -1,53 +1,52 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BobrSpawnBase : MonoBehaviour
 {
-    [SerializeField] float TimeToSpawn;
-    [SerializeField] GameObject Bobr;
-    [SerializeField] GameObject UniqueBobr;
-    [SerializeField] GameObject GoldenBobr;
-    enum BaseType
+    [Header("Spawner setup")]
+    [SerializeField] private float TimeToSpawn;
+
+    [Header("Raycast setup")]
+    [SerializeField] private float distanceBetweenCheck;
+    [SerializeField] private float heightOfCheck = 25f, rangeOfCheck = 30f;
+    [SerializeField] private LayerMask layerMask;
+    [SerializeField] private Vector2 positivePosition, negativePosition;
+
+    private float treesCount;
+
+    private BobrPool bobrPool;
+
+    private void Start()
     {
-        Default,
-        Unique,
-        Golden
-    }
-    [SerializeField] BaseType baseType;
-    private void Awake()
-    {
+        bobrPool = GetComponent<BobrPool>();
+        treesCount = transform.GetChild(0).childCount;
         StartCoroutine(BobrSpawn());
     }
+
     IEnumerator BobrSpawn()
     {
-        yield return new WaitForSeconds(TimeToSpawn);
-        switch (baseType)
+        while (treesCount > 0)
         {
-            case BaseType.Default:
+            yield return new WaitForSeconds(TimeToSpawn);
+            try
+            {
+                for (float x = Random.Range(negativePosition.x, positivePosition.x); x < positivePosition.x; x += distanceBetweenCheck)
                 {
-                    int SpawnQuantity;
-                    SpawnQuantity = Random.Range(1, 3);
-                    for(int i = 0; i < SpawnQuantity; i++)
-                        Instantiate(Bobr);
+                    for (float z = Random.Range(negativePosition.y, positivePosition.y); z < positivePosition.y; z += distanceBetweenCheck)
+                    {
+                        if (Physics.Raycast(new Vector3(x, heightOfCheck, z), Vector3.down, out RaycastHit hit, rangeOfCheck, layerMask))
+                        {
+                            bobrPool.GetBobr(hit.point, Quaternion.identity);
+                            goto End;
+                        }
+                    }
                 }
-                break;
-            case BaseType.Unique:
-                {
-                    int SpawnQuantity;
-                    SpawnQuantity = Random.Range(1, 5);
-                    for (int i = 0; i < SpawnQuantity; i++)
-                        Instantiate(UniqueBobr);
-                }
-                break; 
-            case BaseType.Golden:
-                {
-                    int SpawnQuantity;
-                    SpawnQuantity = Random.Range(1, 2);
-                    for (int i = 0; i < SpawnQuantity; i++)
-                        Instantiate(GoldenBobr);
-                }
-                break;
+            }
+            catch
+            {
+                Debug.LogWarning("All bobrs alive");
+            }
+            End:;
         }
     }
 }

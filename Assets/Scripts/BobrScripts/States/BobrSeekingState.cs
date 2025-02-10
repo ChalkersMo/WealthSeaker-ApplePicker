@@ -4,6 +4,7 @@ public class BobrSeekingState : BobrBaseState
     {
         stateMachine.controller.IsRunningAway = false;
         stateMachine.animationController.Run();
+        stateMachine.controller.OnCollider();
         stateMachine.controller.SeekApples();
     }
 

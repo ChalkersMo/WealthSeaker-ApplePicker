@@ -14,7 +14,7 @@ public class ApplePool : MonoBehaviour
     {
         for (int i = 0; i < poolSize; i++)
         {
-            GameObject apple = Instantiate(applePrefab);
+            GameObject apple = Instantiate(applePrefab, transform.parent.parent);
             apple.SetActive(false); 
             applePool.Enqueue(apple); 
         }

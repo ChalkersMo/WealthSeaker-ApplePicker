@@ -6,13 +6,13 @@ public class BobrPool : MonoBehaviour
     [SerializeField] private GameObject bobrPrefab;
     [SerializeField] private int poolSize = 3;
 
-    private Queue<GameObject> bobrPool = new Queue<GameObject>();
+    private readonly Queue<GameObject> bobrPool = new();
 
     void Start()
     {
         for (int i = 0; i < poolSize; i++)
         {
-            GameObject bobr = Instantiate(bobrPrefab);
+            GameObject bobr = Instantiate(bobrPrefab, transform.GetChild(2));
             bobr.SetActive(false);
             bobrPool.Enqueue(bobr);
         }
@@ -24,8 +24,7 @@ public class BobrPool : MonoBehaviour
         {
             GameObject bobr = bobrPool.Dequeue();
             bobr.SetActive(true);
-            bobr.transform.position = position;
-            bobr.transform.rotation = rotation;
+            bobr.transform.SetPositionAndRotation(position, rotation);
             return bobr;
         }
         else

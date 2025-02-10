@@ -17,11 +17,15 @@ public class BobrController : MonoBehaviour
     private Transform targetApple;
     private Transform bobrBase;
 
+    private Collider bobrCollider;
+
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         ApplePool = FindFirstObjectByType<ApplePool>();
         BobrPool = FindFirstObjectByType<BobrPool>();
+        bobrCollider = GetComponent<Collider>();
+        bobrBase = transform.parent;
     }
 
     public void SetBobrBase(Transform bobrBase)
@@ -59,10 +63,16 @@ public class BobrController : MonoBehaviour
     }
     public void PickUpApple(GameObject apple)
     {
+        bobrCollider.enabled = false;
         agent.SetDestination(transform.position);
         agent.speed = 0;
         targetApple = null;
         ApplePool.ReturnBusyApple(apple);
+    }
+
+    public void OnCollider()
+    {
+        bobrCollider.enabled = true;
     }
     public void RunAway()
     {
