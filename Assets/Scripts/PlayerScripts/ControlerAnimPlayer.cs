@@ -31,7 +31,7 @@ public class ControlerAnimPlayer : MonoBehaviour
     public bool Gathering;
     void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         controller = GetComponent<CharacterController>();  
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

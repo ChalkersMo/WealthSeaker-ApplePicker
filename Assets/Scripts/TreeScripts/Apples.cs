@@ -10,7 +10,7 @@ public class Apples : MonoBehaviour
     private void Awake()
     {
         GameControllerScript = FindFirstObjectByType<GameController>();
-        animator = transform.parent.GetComponent<Animator>();
+        animator = transform.parent.GetComponentInChildren<Animator>();
         CAPlayer = transform.parent.GetComponent<ControlerAnimPlayer>();
         LvlsliderController  = FindFirstObjectByType<LvlSliderController>();
     }
