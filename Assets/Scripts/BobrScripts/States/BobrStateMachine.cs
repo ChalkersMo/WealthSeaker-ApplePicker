@@ -29,7 +29,6 @@ public class BobrStateMachine : MonoBehaviour
     private void Update()
     {
         currentState.UpdateState(this);
-        Debug.Log(currentState.ToString());
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -1,29 +1,31 @@
+using SHG.AnimatorCoder;
 using UnityEngine;
 
-public class BobrAnimationController : MonoBehaviour
+public class BobrAnimationController : AnimatorCoder
 {
     public float bobrRunAnimSpeed;
 
     private Animator animator;
 
-    private void Awake()
+    private void Start()
     {
         animator = GetComponent<Animator>();
+        Initialize(animator);
     }
 
     public void Run()
     {
-        animator.SetTrigger("Run");
+        Play(new AnimationData(Animations.InjuredRun, false, null, 0.2f));
     }
 
     public void PickUp()
     {
-        animator.SetTrigger("PickUp");
+        Play(new AnimationData(Animations.PickingUp, false, null, 0.2f));
     }
 
     public void Death()
     {
-        animator.SetTrigger("Death");
+        Play(new AnimationData(Animations.Death, true, null, 0.1f));
     }
 
     public void RunAnimSpeed(float speed)
@@ -45,5 +47,10 @@ public class BobrAnimationController : MonoBehaviour
         }
         else
             return false;
+    }
+
+    public override void DefaultAnimation(int layer)
+    {
+        Play(new AnimationData(Animations.StandingUp));
     }
 }

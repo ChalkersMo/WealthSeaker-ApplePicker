@@ -17,13 +17,13 @@ public class ShopUpgrades : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI ScoreText;
 
-    ControlerAnimPlayer player;
+    PlayerMovementController player;
     GameController gameController;
     LvlSliderController lvlSliderController;
     Apples ApplesScr;
     private void OnEnable()
     {
-        player = FindFirstObjectByType<ControlerAnimPlayer>();
+        player = FindFirstObjectByType<PlayerMovementController>();
         gameController = FindFirstObjectByType<GameController>();
         lvlSliderController = FindFirstObjectByType<LvlSliderController>();
         ApplesScr = FindFirstObjectByType<Apples>();

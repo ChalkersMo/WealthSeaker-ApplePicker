@@ -3,7 +3,7 @@ using UnityEngine;
 public class Apples : MonoBehaviour
 {
     public static GameController GameControllerScript;
-    ControlerAnimPlayer CAPlayer;
+    PlayerMovementController CAPlayer;
     LvlSliderController LvlsliderController;
     public int AppleBoost;
     Animator animator;
@@ -11,7 +11,7 @@ public class Apples : MonoBehaviour
     {
         GameControllerScript = FindFirstObjectByType<GameController>();
         animator = transform.parent.GetComponentInChildren<Animator>();
-        CAPlayer = transform.parent.GetComponent<ControlerAnimPlayer>();
+        CAPlayer = transform.parent.GetComponent<PlayerMovementController>();
         LvlsliderController  = FindFirstObjectByType<LvlSliderController>();
     }
     private void OnTriggerStay(Collider other)

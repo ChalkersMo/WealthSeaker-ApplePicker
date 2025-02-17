@@ -8,11 +8,11 @@ public class ShopVisibleling : MonoBehaviour
     [SerializeField] private ShopUpgrades _ShopUpgrades;
 
     private InteractionTablleController InteractionTable;
-    private ControlerAnimPlayer CAP;
+    private PlayerMovementController CAP;
 
     private void Start()
     {
-        CAP = FindFirstObjectByType<ControlerAnimPlayer>();
+        CAP = FindFirstObjectByType<PlayerMovementController>();
         InteractionTable = FindFirstObjectByType<InteractionTablleController>();
     }
     private void OnTriggerEnter(Collider other)
