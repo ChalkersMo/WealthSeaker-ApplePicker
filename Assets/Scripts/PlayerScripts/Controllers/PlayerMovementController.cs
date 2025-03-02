@@ -7,8 +7,11 @@ public class PlayerMovementController : MonoBehaviour
     public float jumpHeight = 1f;
 
     public Vector2 Axis;
+    public bool isGrounded;
 
     [SerializeField] private Transform cam;
+    [SerializeField] private Collider AppeGatheringCollider;
+    [SerializeField] private Collider PunchCollider;
 
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundDistance = 0.4f;
@@ -20,7 +23,6 @@ public class PlayerMovementController : MonoBehaviour
 
     private CharacterController controller;
     private Vector3 velocity;
-    private bool isGrounded;
 
     void Start()
     {
@@ -74,5 +76,19 @@ public class PlayerMovementController : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void PickUpItem()
+    {
+        AppeGatheringCollider.enabled = false;
+    }
+    public void OnAppleGatheringCollider()
+    {
+        AppeGatheringCollider.enabled = true;
+    }
+
+    public void Punch()
+    {
+        PunchCollider.enabled = true;
     }
 }

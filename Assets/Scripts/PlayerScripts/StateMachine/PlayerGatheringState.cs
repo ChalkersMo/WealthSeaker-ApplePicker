@@ -1,16 +1,22 @@
-using UnityEngine;
-
-public class PlayerGatheringState : MonoBehaviour
+public class PlayerGatheringState : PlayerBaseState
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void EnterState(PlayerStateMachine stateMachine)
+    {
+        stateMachine.animController.PickUp();
+        stateMachine.controller.PickUpItem();
+    }
+
+    public override void OnTriggerStay(PlayerStateMachine stateMachine)
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void UpdateState(PlayerStateMachine stateMachine)
     {
-        
+        if (stateMachine.animController.IsAnimEnded("Gathering"))
+        {
+            stateMachine.controller.OnAppleGatheringCollider();
+            stateMachine.SwitchState(stateMachine.idleState);
+        }
     }
 }

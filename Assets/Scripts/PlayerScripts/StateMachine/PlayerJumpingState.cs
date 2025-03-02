@@ -2,26 +2,18 @@ public class PlayerJumpingState : PlayerBaseState
 {
     public override void EnterState(PlayerStateMachine stateMachine)
     {
-        throw new System.NotImplementedException();
-    }
-
-    public override void OnCollisionEnter(PlayerStateMachine stateMachine)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void OnTriggerEnter(PlayerStateMachine stateMachine)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void OnTriggerExit(PlayerStateMachine stateMachine)
-    {
-        throw new System.NotImplementedException();
+        stateMachine.animController.Jump();
     }
 
     public override void UpdateState(PlayerStateMachine stateMachine)
     {
-        throw new System.NotImplementedException();
+        stateMachine.controller.Run();
+        if (stateMachine.controller.isGrounded)
+            stateMachine.SwitchState(stateMachine.idleState);
+
     }
+
+    public override void OnTriggerStay(PlayerStateMachine stateMachine)
+    {
+    } 
 }

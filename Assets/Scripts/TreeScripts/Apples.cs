@@ -21,7 +21,6 @@ public class Apples : MonoBehaviour
             GameControllerScript.totalApples += 1 + AppleBoost;
             LvlsliderController.AddXp(5);
             Destroy(other.gameObject);
-            CAPlayer.Gathering = true;
             animator.SetInteger("State", 4);
             Invoke(nameof(EndOfGathering), 0.1f);
         }
@@ -30,13 +29,11 @@ public class Apples : MonoBehaviour
             GameControllerScript.totalApples += 5 + AppleBoost;
             LvlsliderController.AddXp(8);
             Destroy(other.gameObject);
-            CAPlayer.Gathering = true;
             animator.SetInteger("State", 4);
             Invoke(nameof(EndOfGathering), 0.1f);
         }
     }
     void EndOfGathering()
     {
-        CAPlayer.Gathering = false;
     }
 }

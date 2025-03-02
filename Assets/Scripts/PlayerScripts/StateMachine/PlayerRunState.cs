@@ -2,27 +2,21 @@ public class PlayerRunState : PlayerBaseState
 {
     public override void EnterState(PlayerStateMachine stateMachine)
     {
-        throw new System.NotImplementedException();
+        stateMachine.animController.Run();
     }
 
     public override void UpdateState(PlayerStateMachine stateMachine)
     {
-        throw new System.NotImplementedException();
+        stateMachine.controller.Run();
+        if (stateMachine.controller.Axis.x == 0 && stateMachine.controller.Axis.y == 0)
+            stateMachine.SwitchState(stateMachine.idleState);
+        if (stateMachine.controller.Jump())
+            stateMachine.SwitchState(stateMachine.jumpingState);
     }
 
-    public override void OnCollisionEnter(PlayerStateMachine stateMachine)
+    public override void OnTriggerStay(PlayerStateMachine stateMachine)
     {
-        throw new System.NotImplementedException();
+        if(stateMachine.Other.CompareTag("Apple"))
+            stateMachine.SwitchState(stateMachine.gatheringState);
     }
-
-    public override void OnTriggerEnter(PlayerStateMachine stateMachine)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void OnTriggerExit(PlayerStateMachine stateMachine)
-    {
-        throw new System.NotImplementedException();
-    }
-
 }

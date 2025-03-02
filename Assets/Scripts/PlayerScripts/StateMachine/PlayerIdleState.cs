@@ -1,9 +1,10 @@
+using UnityEngine;
 
 public class PlayerIdleState : PlayerBaseState
 {
     public override void EnterState(PlayerStateMachine stateMachine)
     {
-        throw new System.NotImplementedException();
+        stateMachine.animController.Idle();
     }
 
     public override void UpdateState(PlayerStateMachine stateMachine)
@@ -13,21 +14,21 @@ public class PlayerIdleState : PlayerBaseState
             stateMachine.SwitchState(stateMachine.runState);
         if (stateMachine.controller.Jump())
             stateMachine.SwitchState(stateMachine.jumpingState);
+        if (Input.GetMouseButtonDown(0))
+        {
+            stateMachine.attacksController.Attack();
+            stateMachine.animController.Punch();
+            Debug.Log("Punch");
+        }
+            
     }
 
-    public override void OnCollisionEnter(PlayerStateMachine stateMachine)
+    public override void OnTriggerStay(PlayerStateMachine stateMachine)
     {
-        throw new System.NotImplementedException();
-    }
-
-    public override void OnTriggerEnter(PlayerStateMachine stateMachine)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void OnTriggerExit(PlayerStateMachine stateMachine)
-    {
-        throw new System.NotImplementedException();
+        if (stateMachine.Other.CompareTag("Apple"))
+        {
+            stateMachine.SwitchState(stateMachine.gatheringState);
+        }
     }
 
 }

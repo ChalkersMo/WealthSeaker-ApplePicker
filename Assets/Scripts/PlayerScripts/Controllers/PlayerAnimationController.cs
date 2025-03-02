@@ -4,10 +4,10 @@ using UnityEngine;
 public class PlayerAnimationController : AnimatorCoder
 {
     private Animator animator;
-
+    private string lastAnimationName;
     void Start()
     {
-        animator.GetComponentInChildren<Animator>();
+        animator = GetComponentInChildren<Animator>();
         Initialize(animator);
     }
 
@@ -16,6 +16,10 @@ public class PlayerAnimationController : AnimatorCoder
         Play(new AnimationData(Animations.Idle));
     }
 
+    public void Reset()
+    {
+        Play(new AnimationData(Animations.RESET, false, null, 0.1f));
+    }
     public void Idle()
     {
         Play(new AnimationData(Animations.Idle, false, null, 0.2f));
@@ -28,21 +32,48 @@ public class PlayerAnimationController : AnimatorCoder
 
     public void Jump()
     {
-        Play(new AnimationData(Animations.Jump, true, null, 0.2f));
+        Play(new AnimationData(Animations.Jump, false, null, 0.2f));
     }
 
     public void PickUp()
     {
-        Play(new AnimationData(Animations.Gathering, true, null, 0.2f));
+        Play(new AnimationData(Animations.Gathering, false, new AnimationData(Animations.RESET, false, null, 0.1f), 0.2f));
     }
 
     public void Swing()
     {
-        Play(new AnimationData(Animations.AxeSwing, true, null, 0.2f), 1);
+        Play(new AnimationData(Animations.AxeSwing, false, new AnimationData(Animations.RESET, false, null, 0.1f), 0.2f), 1);
     }
 
     public void Punch()
     {
-        Play(new AnimationData(Animations.LeftPunch, true, null, 0.2f), 1);
+        Play(new AnimationData(Animations.LeftPunch, false, null, 0.2f), 1);
+    }
+
+    public bool IsAnimEnded(string name)
+    {
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        if (stateInfo.normalizedTime >= 1.0f && stateInfo.IsName(name))
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public bool CheckAnimationState(string targetAnimationName)
+    {
+        if (animator == null) return false;
+
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        string currentAnimation = stateInfo.fullPathHash.ToString();
+
+        if (currentAnimation != lastAnimationName)
+        {
+            lastAnimationName = currentAnimation;
+            return stateInfo.IsName(targetAnimationName);
+        }
+
+        return false;
     }
 }

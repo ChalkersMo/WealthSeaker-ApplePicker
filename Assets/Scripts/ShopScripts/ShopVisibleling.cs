@@ -28,7 +28,6 @@ public class ShopVisibleling : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.E))
             {
-                CAP.Gathering = true;
                 TPCObj.SetActive(false);
                 InteractionTable.CloseTip();
                 ShopCanvas.SetActive(true);
@@ -50,7 +49,6 @@ public class ShopVisibleling : MonoBehaviour
     {
         Animator animator = ShopCanvas.GetComponent<Animator>();
         animator.SetBool("On", false);
-        CAP.Gathering = false;
         TPCObj.SetActive(true);
         InteractionTable.ShowTip("Press 'E' to shop");
         ShopCanvas.SetActive(false);

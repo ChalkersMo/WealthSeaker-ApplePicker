@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerStateMachine : MonoBehaviour
@@ -5,8 +6,9 @@ public class PlayerStateMachine : MonoBehaviour
     [HideInInspector] public Collision Collision;
     [HideInInspector] public Collider Other;
 
-    public PlayerAnimationController animController;
-    public PlayerMovementController controller;
+    [HideInInspector] public AttacksController attacksController;
+    [HideInInspector] public PlayerAnimationController animController;
+    [HideInInspector] public PlayerMovementController controller;
 
     public PlayerIdleState idleState = new();
     public PlayerRunState runState = new();
@@ -14,10 +16,17 @@ public class PlayerStateMachine : MonoBehaviour
     public PlayerGatheringState gatheringState = new();
 
     private PlayerBaseState currentState;
+    private PlayerBaseState expectedState;
+
+    private bool isReadyTriggerReady = true;
 
     private void Start()
     {
+        attacksController = FindFirstObjectByType<AttacksController>();
+        animController = GetComponent<PlayerAnimationController>();
+        controller = GetComponent<PlayerMovementController>();
         currentState = idleState;
+        expectedState = currentState;
         currentState.EnterState(this);
     }
 
@@ -26,27 +35,28 @@ public class PlayerStateMachine : MonoBehaviour
         currentState.UpdateState(this);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void Entertrigger(Collider other)
     {
-        Collision = collision;
-        currentState.OnCollisionEnter(this);
-    }
+        if(isReadyTriggerReady)
+            StartCoroutine(OnStay());
+        IEnumerator OnStay()
+        {
+            isReadyTriggerReady = false;
+            yield return new WaitForSeconds(1f);
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Other = other;
-        currentState.OnTriggerEnter(this);
-    }
+            Other = other;
+            if (currentState != expectedState)
+                currentState = expectedState;
 
-    private void OnTriggerExit(Collider other)
-    {
-        Other = other;
-        currentState.OnTriggerExit(this);
+            currentState.OnTriggerStay(this);
+            isReadyTriggerReady = true;
+        }   
     }
 
     public void SwitchState(PlayerBaseState state)
     {
         currentState = state;
+        expectedState = state;
         state.EnterState(this);
     }
 }
