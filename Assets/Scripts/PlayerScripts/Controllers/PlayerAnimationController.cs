@@ -13,13 +13,9 @@ public class PlayerAnimationController : AnimatorCoder
 
     public override void DefaultAnimation(int layer)
     {
-        Play(new AnimationData(Animations.Idle));
+        Play(new AnimationData(Animations.Idle), layer);
     }
 
-    public void Reset()
-    {
-        Play(new AnimationData(Animations.RESET, false, null, 0.1f));
-    }
     public void Idle()
     {
         Play(new AnimationData(Animations.Idle, false, null, 0.2f));
@@ -37,7 +33,7 @@ public class PlayerAnimationController : AnimatorCoder
 
     public void PickUp()
     {
-        Play(new AnimationData(Animations.Gathering, false, new AnimationData(Animations.RESET, false, null, 0.1f), 0.2f));
+        Play(new AnimationData(Animations.Gathering, false, null, 0.2f));
     }
 
     public void Swing()
@@ -47,12 +43,13 @@ public class PlayerAnimationController : AnimatorCoder
 
     public void Punch()
     {
-        Play(new AnimationData(Animations.LeftPunch, false, null, 0.2f), 1);
+        Play(new AnimationData(Animations.LeftPunch, false, new AnimationData(Animations.RESET, false, null, 0.1f), 0.2f), 1);
     }
 
     public bool IsAnimEnded(string name)
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+      
         if (stateInfo.normalizedTime >= 1.0f && stateInfo.IsName(name))
         {
             return true;

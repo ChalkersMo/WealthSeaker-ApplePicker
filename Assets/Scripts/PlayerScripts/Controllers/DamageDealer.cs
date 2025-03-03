@@ -4,6 +4,9 @@ public class DamageDealer : MonoBehaviour
 {
     [SerializeField] private float Damage;
     [SerializeField] private float reloadTime;
+    [SerializeField] private string animationName;
+
+    private PlayerAnimationController playerAnimController;
     private PlayerMovementController playerMovementController;
     private Collider _collider;
 
@@ -11,12 +14,16 @@ public class DamageDealer : MonoBehaviour
     void Start()
     {
         playerMovementController = FindFirstObjectByType<PlayerMovementController>();
+        playerAnimController = FindFirstObjectByType<PlayerAnimationController>();
         _collider = GetComponent<Collider>();
     }
 
     public void DealAttack()
     {
         _collider.enabled = true;
+        playerAnimController.PlayByName(
+            animationName, new SHG.AnimatorCoder.AnimationData(SHG.AnimatorCoder.Animations.RESET), 0.2f, 1);
+        Invoke(nameof(EndOfAttack), reloadTime);
     }
 
     private void OnTriggerEnter(Collider other)

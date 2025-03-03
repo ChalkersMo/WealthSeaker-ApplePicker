@@ -4,6 +4,10 @@
 using System.Collections;
 using UnityEngine;
 using System;
+using NUnit.Framework;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace SHG.AnimatorCoder
 {
@@ -163,6 +167,17 @@ namespace SHG.AnimatorCoder
                 return false;
             }
         }
+
+        public bool PlayByName(string name, AnimationData nextAnim = null, float crossfadeDuration = 0.2f, int layer = 0)
+        {
+            if (Enum.TryParse(name, out Animations state))
+            {
+                Play(new AnimationData(state, false, nextAnim, crossfadeDuration), layer);
+                return true;
+            }
+            return false;
+        }
+
 
         private void LogError(string message)
         {

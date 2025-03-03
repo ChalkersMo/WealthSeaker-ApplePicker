@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class PlayerRunState : PlayerBaseState
 {
     public override void EnterState(PlayerStateMachine stateMachine)
@@ -12,6 +14,11 @@ public class PlayerRunState : PlayerBaseState
             stateMachine.SwitchState(stateMachine.idleState);
         if (stateMachine.controller.Jump())
             stateMachine.SwitchState(stateMachine.jumpingState);
+        if (Input.GetMouseButtonDown(0))
+        {
+            stateMachine.attacksController.Attack();
+            stateMachine.animController.Punch();
+        }
     }
 
     public override void OnTriggerStay(PlayerStateMachine stateMachine)

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Damageable : MonoBehaviour
 {
-    [SerializeField][Range(0.1f, 1000f)] private float maxHealth = 100;
+    [SerializeField, Range(0.1f, 1000f)] private float maxHealth = 100;
     [SerializeField] private Transform HpSliderParent;
     [SerializeField] private Gradient sliderGradient;
     [SerializeField] private Color sliderTextColor;

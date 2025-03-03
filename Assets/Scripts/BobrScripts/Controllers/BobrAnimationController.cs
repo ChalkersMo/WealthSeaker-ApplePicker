@@ -25,7 +25,7 @@ public class BobrAnimationController : AnimatorCoder
 
     public void Death()
     {
-        Play(new AnimationData(Animations.Death, true, null, 0.1f));
+        Play(new AnimationData(Animations.Death, false, null, 0.1f));
     }
 
     public void RunAnimSpeed(float speed)

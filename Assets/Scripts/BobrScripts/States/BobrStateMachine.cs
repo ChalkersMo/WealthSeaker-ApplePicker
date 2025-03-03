@@ -13,6 +13,7 @@ public class BobrStateMachine : MonoBehaviour
 
     [HideInInspector] public BobrAnimationController animationController;
     [HideInInspector] public BobrController controller;
+    [HideInInspector] public Damageable hpController;
 
     [HideInInspector] public Collision collision;
     [HideInInspector] public Collider other;

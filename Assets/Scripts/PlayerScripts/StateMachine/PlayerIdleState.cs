@@ -18,7 +18,6 @@ public class PlayerIdleState : PlayerBaseState
         {
             stateMachine.attacksController.Attack();
             stateMachine.animController.Punch();
-            Debug.Log("Punch");
         }
             
     }
