@@ -10,6 +10,8 @@ public class DamageDealer : MonoBehaviour
     private PlayerMovementController playerMovementController;
     private Collider _collider;
 
+    private bool isAttackReady = true;
+
 
     void Start()
     {
@@ -20,10 +22,14 @@ public class DamageDealer : MonoBehaviour
 
     public void DealAttack()
     {
-        _collider.enabled = true;
-        playerAnimController.PlayByName(
-            animationName, new SHG.AnimatorCoder.AnimationData(SHG.AnimatorCoder.Animations.RESET), 0.2f, 1);
-        Invoke(nameof(EndOfAttack), reloadTime);
+        if (isAttackReady)
+        {
+            isAttackReady = false;
+            _collider.enabled = true;
+            playerAnimController.PlayByName(
+                animationName, new SHG.AnimatorCoder.AnimationData(SHG.AnimatorCoder.Animations.RESET), 0.2f, 1);
+            Invoke(nameof(EndOfAttack), reloadTime);
+        }    
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,7 +38,6 @@ public class DamageDealer : MonoBehaviour
         {
             _collider.enabled = false;
             damageable.TakeDamage(Damage * playerMovementController.playerStrength);
-            Invoke(nameof(EndOfAttack), reloadTime);
         }
     }
 
@@ -42,5 +47,6 @@ public class DamageDealer : MonoBehaviour
         {
            _collider.enabled = false;
         }
+        isAttackReady = true;
     }
 }
