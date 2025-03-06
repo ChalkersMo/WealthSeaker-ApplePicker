@@ -26,32 +26,36 @@ public class Damageable : MonoBehaviour
 
     private void AddHealthbarToThisObject()
     {
-        BoxCollider[] colliders = GetComponents<BoxCollider>();
+        // Ищем НЕ триггерный BoxCollider
         BoxCollider mainCollider = null;
-
-        foreach (var col in colliders)
+        foreach (var col in GetComponents<BoxCollider>())
         {
-            if (!col.isTrigger) // Вибираємо НЕ тригерний колайдер
+            if (!col.isTrigger)
             {
                 mainCollider = col;
                 break;
             }
         }
 
-        float colliderTop = mainCollider.bounds.max.y;
-        colliderTop += (mainCollider.transform.lossyScale.y - 1) * 0.5f;
-        Vector3 healthBarPos = new(transform.position.x, colliderTop + 0.5f, transform.position.z);
-        HpSliderParent = Instantiate(HpSliderParent, healthBarPos, Quaternion.identity, transform);
+        if (mainCollider == null)
+        {
+            Debug.LogError("Ошибка: Не найден НЕ триггерный BoxCollider!");
+            return;
+        }
 
+        
         sliderFill = HpSliderParent.GetChild(0).GetChild(0).GetComponent<Image>();
         sliderFill.DOFillAmount(1, 0);
         sliderFill.DOColor(sliderGradient.Evaluate(1), 1);
 
         hpText = HpSliderParent.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
-        //hpText.color = sliderTextColor;
         hpText.text = $"{health}";
+
         OnHealthChanged();
     }
+
+
+
 
     private void OnHealthChanged()
     {

@@ -1,12 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LookAtScript : MonoBehaviour
 {
     public Transform target;
+    private void Start()
+    {
+        target = Camera.main.transform;
+    }
     void Update()
     {
-        gameObject.transform.LookAt(target);
+        transform.LookAt(target);
     }
 }
