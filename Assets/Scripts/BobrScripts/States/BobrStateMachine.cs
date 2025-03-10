@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class BobrStateMachine : MonoBehaviour
 {
@@ -13,16 +14,19 @@ public class BobrStateMachine : MonoBehaviour
 
     [HideInInspector] public BobrAnimationController animationController;
     [HideInInspector] public BobrController controller;
-    [HideInInspector] public Damageable hpController;
+    [HideInInspector] public BobrDamageable hpController;
 
     [HideInInspector] public Collision collision;
     [HideInInspector] public Collider other;
 
-    private void Start()
+    private void Awake()
     {
         animationController = GetComponent<BobrAnimationController>();
         controller = GetComponent<BobrController>();
-
+        hpController = GetComponent<BobrDamageable>();
+    }
+    private void OnEnable()
+    {
         currentState = BobrSpawnState;
         currentState.EnterState(this);
     }

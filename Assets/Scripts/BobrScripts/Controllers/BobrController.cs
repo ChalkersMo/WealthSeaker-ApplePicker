@@ -1,10 +1,10 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class BobrController : MonoBehaviour
 {
-
-    public bool IsRunningAway = false;
+    public bool IsTimid = false;
 
     [SerializeField] private float bobrSpeed;
     [SerializeField] private float bobrRunningSpeed;
@@ -15,23 +15,25 @@ public class BobrController : MonoBehaviour
     private BobrPool BobrPool;
 
     private Transform targetApple;
-    private Transform bobrBase;
+    private Vector3 bobrSpawnPos;
 
     private Collider bobrCollider;
 
-    private void Start()
+    private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         ApplePool = FindFirstObjectByType<ApplePool>();
         BobrPool = FindFirstObjectByType<BobrPool>();
-        bobrCollider = GetComponent<Collider>();
-        bobrBase = transform.parent;
+        bobrCollider = GetComponent<Collider>();       
     }
 
-    public void SetBobrBase(Transform bobrBase)
+    private void OnEnable()
     {
-        this.bobrBase = bobrBase;
-        this.bobrBase.position = transform.position;
+        SetBobrBasePosition(transform.position);
+    }
+    public void SetBobrBasePosition(Vector3 position)
+    {
+        bobrSpawnPos = position;
     }
     public void FindActiveApple()
     {
@@ -42,7 +44,10 @@ public class BobrController : MonoBehaviour
         }
         catch
         {
-            GoToBase();
+            if (IsTimid)
+                GoToBase();
+            else
+                Wait();
         }
     }
     public void SeekApples()
@@ -60,6 +65,7 @@ public class BobrController : MonoBehaviour
         agent.SetDestination(transform.position);
         agent.speed = 0;
         targetApple = null;
+
     }
     public void PickUpApple(GameObject apple)
     {
@@ -76,20 +82,25 @@ public class BobrController : MonoBehaviour
     }
     public void RunAway()
     {
-        IsRunningAway = true;
         agent.speed = bobrRunningSpeed;
         GoToBase();
     }
     public void GoToBase()
     {
-        agent.SetDestination(bobrBase.position);
-        if (Vector3.Distance(transform.position, bobrBase.position) <= 2)
+        agent.SetDestination(bobrSpawnPos);
+        if (Vector3.Distance(transform.position, bobrSpawnPos) <= 2)
         {
             Wait();
         }
     }
     public void Die()
     {
-        BobrPool.ReturnBobr(gameObject);
+        StartCoroutine(die());
+        IEnumerator die()
+        {
+            OnCollider();
+            yield return new WaitForSeconds(3);
+            BobrPool.ReturnBobr(gameObject);
+        }   
     }
 }

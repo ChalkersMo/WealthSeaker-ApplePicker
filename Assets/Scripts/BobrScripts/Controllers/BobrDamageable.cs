@@ -3,47 +3,35 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Damageable : MonoBehaviour
+public class BobrDamageable : MonoBehaviour, IDamageable
 {
-    [SerializeField, Range(0.1f, 1000f)] private float maxHealth = 100;
+    public float MaxHealth { get { return maxHealth; }}
+    [SerializeField] private float maxHealth;
     [SerializeField] private Transform HpSliderParent;
     [SerializeField] private Gradient sliderGradient;
     [SerializeField] private Color sliderTextColor;
 
+    private BobrStateMachine stateMachine;
     private Image sliderFill;
     private TextMeshProUGUI hpText;
     private float health;
 
+    
+
     private void Awake()
     {
-        health = maxHealth;
+        stateMachine = GetComponent<BobrStateMachine>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
+        health = MaxHealth;
         AddHealthbarToThisObject();
     }
 
     private void AddHealthbarToThisObject()
     {
-        // Ищем НЕ триггерный BoxCollider
-        BoxCollider mainCollider = null;
-        foreach (var col in GetComponents<BoxCollider>())
-        {
-            if (!col.isTrigger)
-            {
-                mainCollider = col;
-                break;
-            }
-        }
-
-        if (mainCollider == null)
-        {
-            Debug.LogError("Ошибка: Не найден НЕ триггерный BoxCollider!");
-            return;
-        }
-
-        
+        HpSliderParent.DOScale(1, 1);
         sliderFill = HpSliderParent.GetChild(0).GetChild(0).GetComponent<Image>();
         sliderFill.DOFillAmount(1, 0);
         sliderFill.DOColor(sliderGradient.Evaluate(1), 1);
@@ -55,11 +43,9 @@ public class Damageable : MonoBehaviour
     }
 
 
-
-
-    private void OnHealthChanged()
+    public void OnHealthChanged()
     {
-        float fillAmount = health / maxHealth;
+        float fillAmount = health / MaxHealth;
         sliderFill.DOColor(sliderGradient.Evaluate(fillAmount), fillAmount);
         sliderFill.DOFillAmount(fillAmount, 1);
         hpText.text = $"{health}";
@@ -67,7 +53,7 @@ public class Damageable : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        health = Mathf.Clamp(health - damage, 0, maxHealth);
+        health = Mathf.Clamp(health - damage, 0, MaxHealth);
 
         OnHealthChanged();
 
@@ -80,5 +66,6 @@ public class Damageable : MonoBehaviour
         HpSliderParent.DOShakeRotation(1.5f, 90, 20, 90);
         HpSliderParent.DOScale(0,2);
         hpText.text = "0";
+        stateMachine.SwitchState(stateMachine.BobrDeathState);
     }
 }

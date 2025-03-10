@@ -2,7 +2,6 @@ public class BobrSeekingState : BobrBaseState
 {
     public override void EnterState(BobrStateMachine stateMachine)
     {
-        stateMachine.controller.IsRunningAway = false;
         stateMachine.animationController.RunAnimSpeed(stateMachine.animationController.bobrRunAnimSpeed);
         stateMachine.animationController.Run();
         stateMachine.controller.OnCollider();
@@ -19,7 +18,7 @@ public class BobrSeekingState : BobrBaseState
 
     public override void OnTriggerEnter(BobrStateMachine stateMachine)
     {
-        if (stateMachine.other.CompareTag("Player"))
+        if (stateMachine.other.CompareTag("Player") && stateMachine.controller.IsTimid)
         {
             stateMachine.SwitchState(stateMachine.BobrRunAwayState);
         }
@@ -31,7 +30,6 @@ public class BobrSeekingState : BobrBaseState
 
     public override void UpdateState(BobrStateMachine stateMachine)
     {
-        if(!stateMachine.controller.IsRunningAway)
-            stateMachine.controller.SeekApples();
+        stateMachine.controller.SeekApples();
     }
 }

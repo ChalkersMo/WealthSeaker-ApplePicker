@@ -38,6 +38,11 @@ public class BobrAnimationController : AnimatorCoder
         animator.SetFloat("StandingUpSpeed", speed);
     }
 
+    public void StandUp()
+    {
+        Play(new AnimationData(Animations.StandingUp, false, null, 0.1f));
+    }
+
     public bool IsAnimEnded(string name)
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);

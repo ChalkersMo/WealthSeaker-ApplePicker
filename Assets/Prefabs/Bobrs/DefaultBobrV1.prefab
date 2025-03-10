@@ -1222,10 +1222,10 @@ GameObject:
   - component: {fileID: 5022681035983714048}
   - component: {fileID: 9062051073225380164}
   - component: {fileID: 2745131224255567767}
-  - component: {fileID: 4487144069865256830}
   - component: {fileID: 5282402513614353324}
   - component: {fileID: 6486503975328089734}
   - component: {fileID: 2057760169452892566}
+  - component: {fileID: 4487144069865256830}
   m_Layer: 0
   m_Name: DefaultBobrV1
   m_TagString: Untagged
@@ -1338,22 +1338,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 17, y: 5, z: 17}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &4487144069865256830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5971439753456709111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10d8c1ad2961715478a2e5c34e55ee34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationController: {fileID: 0}
-  controller: {fileID: 0}
-  hpController: {fileID: 0}
-  other: {fileID: 0}
 --- !u!114 &5282402513614353324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1366,7 +1350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff850df33caf9ec44b8547b74b710b3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsRunningAway: 0
+  IsTimid: 0
   bobrSpeed: 4
   bobrRunningSpeed: 6
 --- !u!114 &6486503975328089734
@@ -1394,7 +1378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b2e6da03fe0874dae11f900b55dc0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 10
   HpSliderParent: {fileID: 803005095992075942}
   sliderGradient:
     serializedVersion: 2
@@ -1427,6 +1411,22 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   sliderTextColor: {r: 1, g: 1, b: 1, a: 0}
+--- !u!114 &4487144069865256830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5971439753456709111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10d8c1ad2961715478a2e5c34e55ee34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationController: {fileID: 0}
+  controller: {fileID: 0}
+  hpController: {fileID: 0}
+  other: {fileID: 0}
 --- !u!1 &6260637420176891883
 GameObject:
   m_ObjectHideFlags: 0

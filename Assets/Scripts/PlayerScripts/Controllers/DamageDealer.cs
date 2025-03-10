@@ -34,7 +34,7 @@ public class DamageDealer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Damageable damageable))
+        if (other.TryGetComponent(out IDamageable damageable))
         {
             _collider.enabled = false;
             damageable.TakeDamage(Damage * playerMovementController.playerStrength);

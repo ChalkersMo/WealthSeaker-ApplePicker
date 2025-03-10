@@ -36,8 +36,14 @@ public class BobrSpawnBase : MonoBehaviour
                     {
                         if (Physics.Raycast(new Vector3(x, heightOfCheck, z), Vector3.down, out RaycastHit hit, rangeOfCheck, layerMask))
                         {
-                            bobrPool.GetBobr(hit.point, Quaternion.identity);
-                            goto End;
+
+                            if(bobrPool.GetBobr(hit.point, Quaternion.identity) != null)
+                                goto End;
+                            else
+                            {
+                                Debug.LogWarning("All bobrs alive"); 
+                                goto End;
+                            }                             
                         }
                     }
                 }
