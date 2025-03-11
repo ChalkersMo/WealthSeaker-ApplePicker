@@ -31,7 +31,9 @@ public class BobrDamageable : MonoBehaviour, IDamageable
 
     private void AddHealthbarToThisObject()
     {
-        HpSliderParent.DOScale(1, 1);
+        HpSliderParent.DOScale(0, 0);
+        HpSliderParent.DOShakeRotation(3f, 0, 20, 0);
+        HpSliderParent.DOScale(1, 3);
         sliderFill = HpSliderParent.GetChild(0).GetChild(0).GetComponent<Image>();
         sliderFill.DOFillAmount(1, 0);
         sliderFill.DOColor(sliderGradient.Evaluate(1), 1);

@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class PlayerAnimationController : AnimatorCoder
 {
-    private Animator animator;
+    private Animator _animator;
     private string lastAnimationName;
     void Start()
     {
-        animator = GetComponentInChildren<Animator>();
-        Initialize(animator);
+        _animator = GetComponentInChildren<Animator>();
+        Initialize(_animator);
     }
 
     public override void DefaultAnimation(int layer)
@@ -48,7 +48,7 @@ public class PlayerAnimationController : AnimatorCoder
 
     public bool IsAnimEnded(string name)
     {
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
       
         if (stateInfo.normalizedTime >= 1.0f && stateInfo.IsName(name))
         {
@@ -60,9 +60,9 @@ public class PlayerAnimationController : AnimatorCoder
 
     public bool CheckAnimationState(string targetAnimationName)
     {
-        if (animator == null) return false;
+        if (_animator == null) return false;
 
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
         string currentAnimation = stateInfo.fullPathHash.ToString();
 
         if (currentAnimation != lastAnimationName)

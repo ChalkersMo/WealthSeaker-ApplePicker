@@ -2,6 +2,7 @@ public class BobrSeekingState : BobrBaseState
 {
     public override void EnterState(BobrStateMachine stateMachine)
     {
+        stateMachine.controller.OnAgent();
         stateMachine.animationController.RunAnimSpeed(stateMachine.animationController.bobrRunAnimSpeed);
         stateMachine.animationController.Run();
         stateMachine.controller.OnCollider();

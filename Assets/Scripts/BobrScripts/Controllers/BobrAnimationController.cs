@@ -5,12 +5,12 @@ public class BobrAnimationController : AnimatorCoder
 {
     public float bobrRunAnimSpeed;
 
-    private Animator animator;
+    private Animator _animator;
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
-        Initialize(animator);
+        _animator = GetComponent<Animator>();
+        Initialize(_animator);
     }
 
     public void Run()
@@ -28,14 +28,19 @@ public class BobrAnimationController : AnimatorCoder
         Play(new AnimationData(Animations.Death, false, null, 0.1f));
     }
 
+    public void StandSad()
+    {
+        Play(new AnimationData(Animations.SadIdle, false, null, 0.1f));
+    }
+
     public void RunAnimSpeed(float speed)
     {
-        animator.SetFloat("Speed", speed);
+        _animator.SetFloat("Speed", speed);
     }
 
     public void StandUpSpeed(float speed)
     {
-        animator.SetFloat("StandingUpSpeed", speed);
+        _animator.SetFloat("StandingUpSpeed", speed);
     }
 
     public void StandUp()
@@ -45,7 +50,7 @@ public class BobrAnimationController : AnimatorCoder
 
     public bool IsAnimEnded(string name)
     {
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
         if (stateInfo.normalizedTime >= 1.0f && stateInfo.IsName(name))
         {
             return true;

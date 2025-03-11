@@ -3,6 +3,7 @@ public class BobrHumilityState : BobrBaseState
     public override void EnterState(BobrStateMachine stateMachine)
     {
         stateMachine.controller.Wait();
+        stateMachine.animationController.StandSad();
     }
 
     public override void OnCollisionEnter(BobrStateMachine stateMachine)
@@ -23,5 +24,9 @@ public class BobrHumilityState : BobrBaseState
 
     public override void UpdateState(BobrStateMachine stateMachine)
     {
+        if (!stateMachine.controller.isChasingByPlayer)
+        {
+            stateMachine.controller.SeekApples();
+        }
     }
 }

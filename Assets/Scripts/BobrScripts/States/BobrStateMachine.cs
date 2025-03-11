@@ -3,7 +3,7 @@ using UnityEngine.InputSystem.XR;
 
 public class BobrStateMachine : MonoBehaviour
 {
-    private BobrBaseState currentState;
+    public BobrBaseState currentState;
 
     public BobrSpawnState BobrSpawnState = new();
     public BobrSeekingState BobrSeekingState = new();

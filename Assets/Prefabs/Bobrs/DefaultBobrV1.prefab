@@ -1350,7 +1350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff850df33caf9ec44b8547b74b710b3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsTimid: 0
+  IsTimid: 1
   bobrSpeed: 4
   bobrRunningSpeed: 6
 --- !u!114 &6486503975328089734

@@ -16,6 +16,7 @@ namespace SHG.AnimatorCoder
         StandingUp,
         InjuredRun,
         PickingUp,
+        SadIdle,
         Death,
         RESET  //Keep Reset
     }

@@ -2,7 +2,8 @@ public class BobrRunAwayState : BobrBaseState
 {
     public override void EnterState(BobrStateMachine stateMachine)
     {
-        stateMachine.controller.RunAway();
+        stateMachine.controller.OnAgent();
+        stateMachine.controller.RunAway();       
         stateMachine.animationController.RunAnimSpeed(stateMachine.animationController.bobrRunAnimSpeed * 2);
     }
 
@@ -18,6 +19,7 @@ public class BobrRunAwayState : BobrBaseState
     {
         if (stateMachine.other.CompareTag("Player"))
         {
+            stateMachine.controller.isChasingByPlayer = false;
             stateMachine.SwitchState(stateMachine.BobrSeekingState);
         }
     }

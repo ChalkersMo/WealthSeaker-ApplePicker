@@ -22,7 +22,6 @@ public class BobrPool : MonoBehaviour
     {
         if (bobrPool.Count > 0)
         {
-            Debug.Log(bobrPool.Count);
             GameObject bobr = bobrPool.Dequeue();
             bobr.SetActive(true);
             bobr.transform.SetPositionAndRotation(position, rotation);
