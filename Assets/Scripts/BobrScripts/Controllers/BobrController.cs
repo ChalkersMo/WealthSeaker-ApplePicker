@@ -33,12 +33,12 @@ public class BobrController : MonoBehaviour
 
     private void OnEnable()
     {
-        SetBobrBasePosition(transform.position);
+        Invoke(nameof(SetBobrBasePosition),0.2f);
         agent.Warp(transform.position);
     }
-    public void SetBobrBasePosition(Vector3 position)
+    public void SetBobrBasePosition()
     {
-        bobrSpawnPos = position;
+        bobrSpawnPos = transform.position;
     }
     public void FindActiveApple()
     {
@@ -118,6 +118,10 @@ public class BobrController : MonoBehaviour
     public void GoToBase()
     {
         agent.SetDestination(bobrSpawnPos);
+        
+    }
+    public void CheckRunPos()
+    {
         if (Vector3.Distance(transform.position, bobrSpawnPos) <= 2)
         {
             Wait();

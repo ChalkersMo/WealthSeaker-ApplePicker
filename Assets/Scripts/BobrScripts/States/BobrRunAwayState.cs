@@ -26,5 +26,6 @@ public class BobrRunAwayState : BobrBaseState
 
     public override void UpdateState(BobrStateMachine stateMachine)
     {
+        stateMachine.controller.CheckRunPos();
     }
 }
