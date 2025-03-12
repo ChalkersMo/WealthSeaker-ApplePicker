@@ -9,16 +9,13 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void UpdateState(PlayerStateMachine stateMachine)
     {
-        stateMachine.controller.CheckInputs();
+        stateMachine.controller.Run();
         if (stateMachine.controller.Axis.x != 0 || stateMachine.controller.Axis.y != 0)
             stateMachine.SwitchState(stateMachine.runState);
-        if (stateMachine.controller.Jump())
+        if (Input.GetKeyDown(KeyCode.Space))
             stateMachine.SwitchState(stateMachine.jumpingState);
         if (Input.GetMouseButtonDown(0))
-        {
             stateMachine.attacksController.Attack();
-            stateMachine.animController.Punch();
-        }
             
     }
 

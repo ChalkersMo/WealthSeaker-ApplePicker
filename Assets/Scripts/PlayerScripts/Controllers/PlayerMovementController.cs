@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovementController : MonoBehaviour
@@ -7,14 +8,15 @@ public class PlayerMovementController : MonoBehaviour
     public float jumpHeight = 1f;
 
     public Vector2 Axis;
-    public bool isGrounded;
+    public bool isGroundedAfterJump = false;
+
 
     [SerializeField] private Transform cam;
     [SerializeField] private Collider AppeGatheringCollider;
     [SerializeField] private Collider PunchCollider;
 
     [SerializeField] private Transform groundCheck;
-    [SerializeField] private float groundDistance = 0.4f;
+    [SerializeField] private float groundDistance = 0.1f;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float turnSmoothTime = 0.1f;
 
@@ -23,6 +25,8 @@ public class PlayerMovementController : MonoBehaviour
 
     private CharacterController controller;
     private Vector3 velocity;
+
+    private bool isGrounded;
 
     void Start()
     {
@@ -58,24 +62,28 @@ public class PlayerMovementController : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
-    public bool Jump()
+    public void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        StartCoroutine(jump());
+        IEnumerator jump()
         {
-            isGrounded = Physics.CheckBox(groundCheck.position, new Vector3(0.5f, groundDistance, 0.5f), Quaternion.identity, groundMask);
-
-            if (isGrounded && velocity.y < 0)
+            while (true)
             {
-                velocity.y = -2f;
-            }
+                isGrounded = Physics.CheckBox(groundCheck.position, new Vector3(0.5f, groundDistance, 0.5f), Quaternion.identity, groundMask);
 
-            if (isGrounded)
-            {
-                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-                return true;
+                if (isGrounded && isGroundedAfterJump)
+                {
+                    velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                    isGroundedAfterJump = false;
+                }
+
+                if (isGrounded && velocity.y < 0)
+                    break;
+
+                yield return new WaitForSeconds(0.2f);
             }
-        }
-        return false;
+            isGroundedAfterJump = true;
+        }   
     }
 
     public void PickUpItem()

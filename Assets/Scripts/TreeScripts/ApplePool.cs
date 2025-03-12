@@ -66,6 +66,16 @@ public class ApplePool : MonoBehaviour
 
             return randomApple;
         }
+        else if(busyApples.Count > 0) 
+        {
+            int randomIndex = Random.Range(0, activeApples.Count);
+            GameObject randomApple = activeApples[randomIndex];
+
+            busyApples.RemoveAt(randomIndex);
+            busyApples.Add(randomApple);
+
+            return randomApple;           
+        }
         else
         {
             Debug.LogWarning("No active apples available!");

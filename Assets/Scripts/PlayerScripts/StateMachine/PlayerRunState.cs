@@ -12,7 +12,7 @@ public class PlayerRunState : PlayerBaseState
         stateMachine.controller.Run();
         if (stateMachine.controller.Axis.x == 0 && stateMachine.controller.Axis.y == 0)
             stateMachine.SwitchState(stateMachine.idleState);
-        if (stateMachine.controller.Jump())
+        if (Input.GetKeyDown(KeyCode.Space))
             stateMachine.SwitchState(stateMachine.jumpingState);
         if (Input.GetMouseButtonDown(0))
         {

@@ -42,13 +42,13 @@ public class BobrStateMachine : MonoBehaviour
         currentState.OnCollisionEnter(this);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void TriggerEnter(Collider other)
     {
         this.other = other;
         currentState.OnTriggerEnter(this);
     }
 
-    private void OnTriggerExit(Collider other)
+    public void TriggerExit(Collider other)
     {
         this.other = other;
         currentState.OnTriggerExit(this);
