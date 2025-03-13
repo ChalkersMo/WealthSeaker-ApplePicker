@@ -118,7 +118,7 @@ public class BobrController : MonoBehaviour
     public void GoToBase()
     {
         agent.SetDestination(bobrSpawnPos);
-        
+        CheckRunPos();
     }
     public void CheckRunPos()
     {
