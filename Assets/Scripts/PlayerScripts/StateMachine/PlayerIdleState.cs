@@ -5,6 +5,7 @@ public class PlayerIdleState : PlayerBaseState
     public override void EnterState(PlayerStateMachine stateMachine)
     {
         stateMachine.animController.Idle();
+        stateMachine.controller.OnAppleGatheringCollider();
     }
 
     public override void UpdateState(PlayerStateMachine stateMachine)
@@ -19,10 +20,12 @@ public class PlayerIdleState : PlayerBaseState
             
     }
 
-    public override void OnTriggerStay(PlayerStateMachine stateMachine)
+    public override void OnTriggerEnter(PlayerStateMachine stateMachine)
     {
-        if (stateMachine.Other.CompareTag("Apple"))
+        if (stateMachine.Other.TryGetComponent<IPickupable>(out IPickupable pickupable))
         {
+            stateMachine.animController.PickUp();
+            pickupable.PickUp();
             stateMachine.SwitchState(stateMachine.gatheringState);
         }
     }

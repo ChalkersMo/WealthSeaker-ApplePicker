@@ -18,7 +18,7 @@ public class PlayerAnimationController : AnimatorCoder
 
     public void Idle()
     {
-        Play(new AnimationData(Animations.Idle, false, null, 0.2f));
+        Play(new AnimationData(Animations.Idle, false, null, 0.1f));
     }
 
     public void Run()
@@ -33,7 +33,7 @@ public class PlayerAnimationController : AnimatorCoder
 
     public void PickUp()
     {
-        Play(new AnimationData(Animations.Gathering, false, null, 0.2f));
+        Play(new AnimationData(Animations.Gathering, false, null, 0));
     }
 
     public void Swing()
@@ -46,17 +46,19 @@ public class PlayerAnimationController : AnimatorCoder
         Play(new AnimationData(Animations.LeftPunch, false, new AnimationData(Animations.RESET, false, null, 0.1f), 0.2f), 1);
     }
 
-    public bool IsAnimEnded(string name)
+    public void ChangePickingUpSpeed(float speed)
+    {
+        _animator.SetFloat("PickingUpSpeed", speed);
+    }
+
+    public bool IsAnimationFinished(string name)
     {
         AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
-      
-        if (stateInfo.normalizedTime >= 1.0f && stateInfo.IsName(name))
-        {
-            return true;
-        }
-        else
-            return false;
+        AnimatorTransitionInfo transitionInfo = _animator.GetAnimatorTransitionInfo(0);
+
+        return stateInfo.IsName(name) && stateInfo.normalizedTime >= 1.0f && !transitionInfo.anyState;
     }
+
 
     public bool CheckAnimationState(string targetAnimationName)
     {

@@ -11,8 +11,9 @@ public class BobrSeekingState : BobrBaseState
 
     public override void OnCollisionEnter(BobrStateMachine stateMachine)
     {
-        if (stateMachine.collision.transform.CompareTag("Apple"))
+        if (stateMachine.collision.transform.TryGetComponent<ApplePickupable>(out ApplePickupable pickupable))
         {
+            pickupable.BobrPickUp();
             stateMachine.SwitchState(stateMachine.BobrPickUpAppleState);
         }
     }

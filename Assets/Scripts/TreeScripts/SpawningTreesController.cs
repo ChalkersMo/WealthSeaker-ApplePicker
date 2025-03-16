@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class SpawningTreesController : MonoBehaviour
 {
-    [SerializeField] GameObject[] TreesZoneToActive;
-    [SerializeField] GameObject Sign;
+    [SerializeField] private GameObject[] TreesZoneToActive;
+    [SerializeField] private GameObject Sign;
 
     public void NewLvl(int currentLvl)
     {

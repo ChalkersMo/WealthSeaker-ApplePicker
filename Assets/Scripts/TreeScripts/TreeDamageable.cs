@@ -5,9 +5,11 @@ public class TreeDamageable : MonoBehaviour, IDamageable
     public float MaxHealth { get { return maxHealth; } }
     [SerializeField] private float maxHealth;
 
+    private float health;
+
     public void Die()
     {
-        throw new System.NotImplementedException();
+        Destroy(gameObject, 5);
     }
 
     public void OnHealthChanged()

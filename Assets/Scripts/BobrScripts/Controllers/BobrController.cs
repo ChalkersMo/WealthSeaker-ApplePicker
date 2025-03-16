@@ -98,7 +98,6 @@ public class BobrController : MonoBehaviour
         bobrCollider.enabled = false;
         agent.isStopped = true;
         targetApple = null;
-        ApplePool.ReturnBusyApple(apple);
     }
     public void OnAgent()
     {

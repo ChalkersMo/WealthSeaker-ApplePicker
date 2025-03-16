@@ -21,9 +21,13 @@ public class PlayerRunState : PlayerBaseState
         }
     }
 
-    public override void OnTriggerStay(PlayerStateMachine stateMachine)
+    public override void OnTriggerEnter(PlayerStateMachine stateMachine)
     {
-        if(stateMachine.Other.CompareTag("Apple"))
+        if (stateMachine.Other.TryGetComponent<IPickupable>(out IPickupable pickupable))
+        {
+            stateMachine.animController.PickUp();
+            pickupable.PickUp();
             stateMachine.SwitchState(stateMachine.gatheringState);
+        }
     }
 }

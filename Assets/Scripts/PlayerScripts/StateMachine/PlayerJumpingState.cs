@@ -13,7 +13,7 @@ public class PlayerJumpingState : PlayerBaseState
 
     }
 
-    public override void OnTriggerStay(PlayerStateMachine stateMachine)
+    public override void OnTriggerEnter(PlayerStateMachine stateMachine)
     {
     } 
 }

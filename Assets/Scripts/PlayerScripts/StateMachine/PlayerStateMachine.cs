@@ -16,9 +16,6 @@ public class PlayerStateMachine : MonoBehaviour
     public PlayerGatheringState gatheringState = new();
 
     private PlayerBaseState currentState;
-    private PlayerBaseState expectedState;
-
-    private bool isReadyTriggerReady = true;
 
     private void Start()
     {
@@ -26,7 +23,6 @@ public class PlayerStateMachine : MonoBehaviour
         animController = GetComponent<PlayerAnimationController>();
         controller = GetComponent<PlayerMovementController>();
         currentState = idleState;
-        expectedState = currentState;
         currentState.EnterState(this);
     }
 
@@ -37,26 +33,13 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void Entertrigger(Collider other)
     {
-        if(isReadyTriggerReady)
-            StartCoroutine(OnStay());
-        IEnumerator OnStay()
-        {
-            isReadyTriggerReady = false;
-            yield return new WaitForSeconds(1f);
-
-            Other = other;
-            if (currentState != expectedState)
-                currentState = expectedState;
-
-            currentState.OnTriggerStay(this);
-            isReadyTriggerReady = true;
-        }   
+        Other = other;
+        currentState.OnTriggerEnter(this);
     }
 
     public void SwitchState(PlayerBaseState state)
     {
         currentState = state;
-        expectedState = state;
         state.EnterState(this);
     }
 }

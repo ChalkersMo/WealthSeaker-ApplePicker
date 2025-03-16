@@ -25,7 +25,6 @@ public class GameController : MonoBehaviour
         {
             tickTimer -= Time.deltaTime;
             UpdateTimeText();
-            UpdateScoreText();
         }
         else
         {
@@ -45,10 +44,5 @@ public class GameController : MonoBehaviour
         float minutes = Mathf.FloorToInt(tickTimer / 60);
         float seconds = Mathf.FloorToInt(tickTimer % 60);
         timerText.text = string.Format("{0:00} : {1:00}", minutes, seconds);
-    }
-
-    void UpdateScoreText()
-    {
-        ScoreText.text = totalApples.ToString();
     }
 }

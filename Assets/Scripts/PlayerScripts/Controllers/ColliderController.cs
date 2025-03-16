@@ -9,7 +9,7 @@ public class ColliderController : MonoBehaviour
         _playerState = GetComponentInParent<PlayerStateMachine>();
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         _playerState.Entertrigger(other);
     }
