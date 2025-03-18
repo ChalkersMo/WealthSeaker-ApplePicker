@@ -38,6 +38,6 @@ public class AxeDamageDealer : DamageDealer
 
     private void Broke()
     {
-        attackController.ChangeDamageDealer("Punch");
+        attackController.ChangeDamageDealer("Hand");
     }
 }
