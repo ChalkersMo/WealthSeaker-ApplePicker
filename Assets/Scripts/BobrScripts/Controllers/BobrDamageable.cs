@@ -11,7 +11,7 @@ public class BobrDamageable : MonoBehaviour, IDamageable
     [SerializeField] private float maxHealth;
     [SerializeField] private int rank;
 
-    [SerializeField, Space, Header("hp bar config")] private Transform HpSliderParent;
+    [SerializeField, Space, Header("HP bar config")] private Transform HpSliderParent;
     [SerializeField] private Gradient sliderGradient;
     [SerializeField] private Color sliderTextColor;
 

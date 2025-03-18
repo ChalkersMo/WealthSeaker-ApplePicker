@@ -15,7 +15,7 @@ public class BobrAnimationController : AnimatorCoder
 
     public void Run()
     {
-        Play(new AnimationData(Animations.InjuredRun, false, null, 0.2f));
+        Play(new AnimationData(Animations.InjuredRun, false, null, 0.1f));
     }
 
     public void PickUp()
