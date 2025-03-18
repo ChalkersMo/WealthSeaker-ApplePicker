@@ -3,7 +3,10 @@ using UnityEngine;
 public class TreeDamageable : MonoBehaviour, IDamageable
 {
     public float MaxHealth { get { return maxHealth; } }
+    public int Rank { get { return rank; } }
+
     [SerializeField] private float maxHealth;
+    [SerializeField] private int rank;
 
     private float health;
 
@@ -14,12 +17,17 @@ public class TreeDamageable : MonoBehaviour, IDamageable
 
     public void OnHealthChanged()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void TakeDamage(float damage)
     {
-        throw new System.NotImplementedException();
+        health = Mathf.Clamp(health - damage, 0, MaxHealth);
+
+        OnHealthChanged();
+
+        if (health == 0)
+            Die();  
     }
 
 }

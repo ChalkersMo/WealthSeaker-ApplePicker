@@ -6,8 +6,12 @@ using UnityEngine.UI;
 public class BobrDamageable : MonoBehaviour, IDamageable
 {
     public float MaxHealth { get { return maxHealth; }}
+    public int Rank {  get { return rank; }}
+
     [SerializeField] private float maxHealth;
-    [SerializeField] private Transform HpSliderParent;
+    [SerializeField] private int rank;
+
+    [SerializeField, Space, Header("hp bar config")] private Transform HpSliderParent;
     [SerializeField] private Gradient sliderGradient;
     [SerializeField] private Color sliderTextColor;
 

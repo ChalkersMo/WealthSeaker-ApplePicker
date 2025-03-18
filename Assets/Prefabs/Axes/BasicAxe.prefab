@@ -182,8 +182,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6761960800217762898}
   - component: {fileID: 7067019911050021474}
-  - component: {fileID: 9075621690519026727}
   - component: {fileID: 1638281199188869749}
+  - component: {fileID: 4493208816788366691}
   m_Layer: 0
   m_Name: BasicAxe
   m_TagString: Untagged
@@ -229,21 +229,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.3, y: 0.3, z: 0.3}
   m_Center: {x: 0, y: 0, z: -0.1}
---- !u!114 &9075621690519026727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7556505480228012929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9b950422823ecc47a61d559d75f3976, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 5
-  reloadTime: 2
-  animationName: AxeSwing
 --- !u!54 &1638281199188869749
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -271,3 +256,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4493208816788366691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7556505480228012929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1dfb4115cdb51d4b9aaaff6f067adfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 5
+  reloadTime: 5
+  animationName: AxeSwing

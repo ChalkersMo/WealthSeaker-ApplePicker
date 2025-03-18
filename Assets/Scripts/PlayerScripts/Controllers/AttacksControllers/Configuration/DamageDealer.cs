@@ -1,26 +1,27 @@
 using UnityEngine;
 
-public class DamageDealer : MonoBehaviour
+public abstract class DamageDealer : MonoBehaviour
 {
-    [SerializeField] private float Damage;
-    [SerializeField] private float reloadTime;
-    [SerializeField] private string animationName;
+    [SerializeField] protected int Rank;
+    [SerializeField] protected float Damage;
+    [SerializeField] protected float reloadTime;
+    [SerializeField] protected string animationName;
 
-    private PlayerAnimationController playerAnimController;
-    private PlayerMovementController playerMovementController;
-    private Collider _collider;
+    protected PlayerAnimationController playerAnimController;
+    protected PlayerMovementController playerMovementController;
+    protected Collider _collider;
 
-    private bool isAttackReady = true;
+    protected bool isAttackReady = true;
 
 
-    void Start()
+    protected virtual void Start()
     {
         playerMovementController = FindFirstObjectByType<PlayerMovementController>();
         playerAnimController = FindFirstObjectByType<PlayerAnimationController>();
         _collider = GetComponent<Collider>();
     }
 
-    public void DealAttack()
+    public virtual void DealAttack()
     {
         if (isAttackReady)
         {
@@ -32,16 +33,19 @@ public class DamageDealer : MonoBehaviour
         }    
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out IDamageable damageable))
         {
             _collider.enabled = false;
-            damageable.TakeDamage(Damage * playerMovementController.playerStrength);
+            if(damageable.Rank > Rank)
+                damageable.TakeDamage(Damage / playerMovementController.playerStrength / 2);
+            else
+                damageable.TakeDamage(Damage * playerMovementController.playerStrength);
         }
     }
 
-    private void EndOfAttack()
+    protected virtual void EndOfAttack()
     {
         if (_collider.enabled)
         {
