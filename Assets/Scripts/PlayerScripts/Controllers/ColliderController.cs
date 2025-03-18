@@ -13,4 +13,9 @@ public class ColliderController : MonoBehaviour
     {
         _playerState.Entertrigger(other);
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        _playerState.StayInTrigger(other);
+    }
 }

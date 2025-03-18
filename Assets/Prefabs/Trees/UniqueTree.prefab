@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b308d49f7f38b040a89c29c74ef31d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 2987268512353563471}
+  explosion: {fileID: 158403694470469904}
 --- !u!1 &809149654604361585
 GameObject:
   m_ObjectHideFlags: 0
@@ -5130,7 +5130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1811441599483156953
 Transform:
   m_ObjectHideFlags: 0
@@ -5163,7 +5163,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -10159,7 +10159,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BoomEffect: {fileID: 1122574288145186776}
-  treeType: 1
+  timeToSpawn: 0
+  maxAppleSpawnCount: 0
 --- !u!1 &8315281567831974843
 GameObject:
   m_ObjectHideFlags: 0

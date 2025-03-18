@@ -14,7 +14,7 @@ public abstract class DamageDealer : MonoBehaviour
     protected bool isAttackReady = true;
 
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         playerMovementController = FindFirstObjectByType<PlayerMovementController>();
         playerAnimController = FindFirstObjectByType<PlayerAnimationController>();

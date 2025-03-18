@@ -37,6 +37,12 @@ public class PlayerStateMachine : MonoBehaviour
         currentState.OnTriggerEnter(this);
     }
 
+    public void StayInTrigger(Collider other)
+    {
+        Other = other;
+        currentState.OnTriggerStay(this);
+    }
+
     public void SwitchState(PlayerBaseState state)
     {
         currentState = state;

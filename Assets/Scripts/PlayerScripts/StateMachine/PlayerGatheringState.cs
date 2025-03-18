@@ -10,6 +10,10 @@ public class PlayerGatheringState : PlayerBaseState
         
     }
 
+    public override void OnTriggerStay(PlayerStateMachine stateMachine)
+    {
+    }
+
     public override void UpdateState(PlayerStateMachine stateMachine)
     {
         if (stateMachine.animController.IsAnimationFinished("Gathering"))

@@ -11,6 +11,9 @@ public class ApplePickupable : MonoBehaviour, IPickupable
             Count = count;
         }
     }
+
+    public bool IsNeedButtonPress { get => false; set => IsNeedButtonPress = false; }
+
     [SerializeField] private int count;
 
     private ItemsStorage storage;

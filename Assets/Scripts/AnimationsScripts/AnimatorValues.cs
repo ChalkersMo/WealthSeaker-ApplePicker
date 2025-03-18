@@ -6,18 +6,24 @@ namespace SHG.AnimatorCoder
     /// <summary> Complete list of all animation state names </summary>
     public enum Animations
     {
-        //Change the list below to your animation state names
+        //Player Anims
         Idle,
         Run,
         Jump,
         Gathering,
         LeftPunch,
         AxeSwing,
+        //Bobr anims
         StandingUp,
         InjuredRun,
         PickingUp,
         SadIdle,
         Death,
+        //Axe indicator anims
+        NewAxe,
+        AxeCrack,
+        AxeDestroy,
+
         RESET  //Keep Reset
     }
 

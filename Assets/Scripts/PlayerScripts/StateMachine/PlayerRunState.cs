@@ -17,7 +17,6 @@ public class PlayerRunState : PlayerBaseState
         if (Input.GetMouseButtonDown(0))
         {
             stateMachine.attacksController.Attack();
-            stateMachine.animController.Punch();
         }
     }
 
@@ -25,9 +24,19 @@ public class PlayerRunState : PlayerBaseState
     {
         if (stateMachine.Other.TryGetComponent<IPickupable>(out IPickupable pickupable))
         {
-            stateMachine.animController.PickUp();
-            pickupable.PickUp();
-            stateMachine.SwitchState(stateMachine.gatheringState);
+            if (!pickupable.IsNeedButtonPress)
+            {
+                stateMachine.animController.PickUp();
+                pickupable.PickUp();
+                stateMachine.SwitchState(stateMachine.gatheringState);
+            }          
         }
+    }
+
+    public override void OnTriggerStay(PlayerStateMachine stateMachine)
+    {
+        if (Input.GetKeyDown(KeyCode.E) && stateMachine.Other.TryGetComponent<IPickupable>(out IPickupable pickupable))
+            if (pickupable.IsNeedButtonPress)
+                pickupable.PickUp();
     }
 }

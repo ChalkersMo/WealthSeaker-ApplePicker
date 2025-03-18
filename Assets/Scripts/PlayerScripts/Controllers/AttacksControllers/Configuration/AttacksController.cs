@@ -3,10 +3,11 @@ using System.Collections.Generic;
 
 public class AttacksController : MonoBehaviour
 {
+    [HideInInspector] public DamageDealer currentDamageDealer;
+
     [SerializeField] private List<DamageDealerEntry> damageDealersList;
     private readonly Dictionary<string, DamageDealer> damageDealers = new Dictionary<string, DamageDealer>();
-    private DamageDealer currentDamageDealer;
-
+ 
     private void Awake()
     {
         foreach (var entry in damageDealersList)
