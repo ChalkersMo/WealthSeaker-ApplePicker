@@ -1427,6 +1427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   rank: 0
+  xpForKilling: 5
   HpSliderParent: {fileID: 803005095992075942}
   sliderGradient:
     serializedVersion: 2

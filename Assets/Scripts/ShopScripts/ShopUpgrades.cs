@@ -20,13 +20,12 @@ public class ShopUpgrades : MonoBehaviour
     PlayerMovementController player;
     GameController gameController;
     LvlSliderController lvlSliderController;
-    Apples ApplesScr;
     private void OnEnable()
     {
         player = FindFirstObjectByType<PlayerMovementController>();
         gameController = FindFirstObjectByType<GameController>();
         lvlSliderController = FindFirstObjectByType<LvlSliderController>();
-        ApplesScr = FindFirstObjectByType<Apples>();
+
 
         SpeedPriceText.text = $"Price: {SpeedPrice}";
         IncomingPriceText.text = $"Price: {IncomingPrice}";
@@ -49,7 +48,6 @@ public class ShopUpgrades : MonoBehaviour
         if (gameController.totalApples >= SpeedPrice)
         {
             gameController.totalApples -= SpeedPrice;
-            lvlSliderController.AddXp(20);
             SpeedPrice *= 2;
             player.speed += 0.3f;
             if (gameController.totalApples >= SpeedPrice)
@@ -71,9 +69,8 @@ public class ShopUpgrades : MonoBehaviour
         if (gameController.totalApples >= IncomingPrice)
         {
             gameController.totalApples -= IncomingPrice;
-            lvlSliderController.AddXp(35);
             IncomingPrice *= 2;
-            ApplesScr.AppleBoost += 1;
+
             if (gameController.totalApples >= IncomingPrice)
                 IncomingPriceText.outlineColor = Color.white;
             else

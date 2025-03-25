@@ -10,6 +10,7 @@ public class BobrDamageable : MonoBehaviour, IDamageable
 
     [SerializeField] private float maxHealth;
     [SerializeField] private int rank;
+    [SerializeField] private float xpForKilling;
 
     [SerializeField, Space, Header("HP bar config")] private Transform HpSliderParent;
     [SerializeField] private Gradient sliderGradient;
@@ -20,11 +21,12 @@ public class BobrDamageable : MonoBehaviour, IDamageable
     private TextMeshProUGUI hpText;
     private float health;
 
-    
+    private PlayerLvlController playerLvlController;
 
     private void Awake()
     {
         stateMachine = GetComponent<BobrStateMachine>();
+        playerLvlController = FindFirstObjectByType<PlayerLvlController>();
     }
 
     private void OnEnable()
@@ -69,6 +71,7 @@ public class BobrDamageable : MonoBehaviour, IDamageable
 
     public void Die()
     {
+        playerLvlController.XpUp(xpForKilling);
         HpSliderParent.DOShakeRotation(1.5f, 90, 20, 90);
         HpSliderParent.DOScale(0,2);
         hpText.text = "0";

@@ -1,31 +1,36 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LvlSliderController : MonoBehaviour
 {
-    public int CurrentLvl;
-    Image Slider;
-    TextMeshProUGUI LvlText;
-    [SerializeField] GameObject LvlUpEffect;
+    [SerializeField] private GameObject LvlUpEffect;
 
-    SpawningTreesController LvlSpawningTrees;
+    private Image Slider;
+    private TextMeshProUGUI LvlText;
+
+    private PlayerLvlController playerLvlController;
+
     private void Start()
     {
         Slider = gameObject.GetComponent<Image>();
         LvlText = Slider.GetComponentInChildren<TextMeshProUGUI>();
-        LvlSpawningTrees = FindFirstObjectByType<SpawningTreesController>();
+
+        playerLvlController = FindFirstObjectByType<PlayerLvlController>();
+        PlayerLvlController.PlayerXpUpAction += AddXp;
+        PlayerLvlController.PlayerLvlAction += LvlUp;
     }
-    public void AddXp(float Xp)
+
+    private void AddXp(float Xp)
     {
-        Slider.fillAmount += Xp / 100;
-        if (Slider.fillAmount >= 1)
-        {
-            Slider.fillAmount = 0.0001f;
-            CurrentLvl++;
-            LvlSpawningTrees.NewLvl(CurrentLvl);
-            LvlText.text = CurrentLvl.ToString();
-            LvlUpEffect.SetActive(true);
-        }
+        Slider.DOFillAmount(Xp / playerLvlController.XpNeedToLvlUp[playerLvlController.PlayerLvl], 1);
+    }
+
+    private void LvlUp(int lvl)
+    {
+        Slider.DOFillAmount(0.0001f, 1);
+        LvlText.text = lvl.ToString();
+        LvlUpEffect.SetActive(true);
     }
 }
