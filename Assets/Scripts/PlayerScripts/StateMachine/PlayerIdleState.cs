@@ -30,6 +30,16 @@ public class PlayerIdleState : PlayerBaseState
                 pickupable.PickUp();
                 stateMachine.SwitchState(stateMachine.gatheringState);
             }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    stateMachine.animController.PickUp();
+                    pickupable.PickUp();
+                    stateMachine.SwitchState(stateMachine.gatheringState);
+                }
+                    
+            }
         }
     }
 
@@ -37,6 +47,10 @@ public class PlayerIdleState : PlayerBaseState
     {
         if (Input.GetKeyDown(KeyCode.E) && stateMachine.Other.TryGetComponent<IPickupable>(out IPickupable pickupable))
             if (pickupable.IsNeedButtonPress)
+            {
+                stateMachine.animController.PickUp();
                 pickupable.PickUp();
+                stateMachine.SwitchState(stateMachine.gatheringState);
+            }                
     }
 }

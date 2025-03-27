@@ -19,11 +19,11 @@ public class InteractionTablleController : MonoBehaviour
         interactionTable.transform.localScale = Vector3.zero;
         interactionEnabled = true;
         interactionTable.SetActive(true);
-        interactionTable.transform.DOScale(1, 1);
+        interactionTable.transform.DOScale(0.3f, 0.5f);
     }
     public void CloseTip()
     {
-        StartCoroutine(EcloseTip(1));
+        StartCoroutine(EcloseTip(0.5f));
     }
 
     private IEnumerator EcloseTip(float TimeToClose)

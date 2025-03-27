@@ -10,10 +10,13 @@ public class AxePickingUp : MonoBehaviour, IPickupable
 
     private AttacksController attackController;
     private InteractionTablleController interactionTablleController;
+    private AxePool axePool;
+
     private void Awake()
     {
         attackController = FindFirstObjectByType<AttacksController>();
         interactionTablleController = FindFirstObjectByType<InteractionTablleController>();
+        axePool = GetComponentInParent<AxePool>();
     }
 
     private void OnEnable()
@@ -41,8 +44,7 @@ public class AxePickingUp : MonoBehaviour, IPickupable
     {
         interactionTablleController.CloseTip();
         attackController.ChangeDamageDealer(AxeDamageDealerName);
-        // must be return to pool
-        Destroy(gameObject);
+        axePool.ReturnAxe(gameObject);
     }
     private void DisappearAnim()
     {
@@ -50,7 +52,7 @@ public class AxePickingUp : MonoBehaviour, IPickupable
     }
     private void Disappear()
     {
-        // must be return to pool
-        Destroy(gameObject);
+        interactionTablleController.CloseTip();
+        axePool.ReturnAxe(gameObject);
     }
 }

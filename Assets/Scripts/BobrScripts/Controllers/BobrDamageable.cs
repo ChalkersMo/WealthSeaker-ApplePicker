@@ -22,10 +22,12 @@ public class BobrDamageable : MonoBehaviour, IDamageable
     private float health;
 
     private PlayerLvlController playerLvlController;
+    private AxePool axePool;
 
     private void Awake()
     {
         stateMachine = GetComponent<BobrStateMachine>();
+        axePool = GetComponentInParent<AxePool>();
         playerLvlController = FindFirstObjectByType<PlayerLvlController>();
     }
 
@@ -75,6 +77,7 @@ public class BobrDamageable : MonoBehaviour, IDamageable
         HpSliderParent.DOShakeRotation(1.5f, 90, 20, 90);
         HpSliderParent.DOScale(0,2);
         hpText.text = "0";
+        axePool.GetAxe(new Vector3(transform.position.x, transform.position.y + 2, transform.position.z));
         stateMachine.SwitchState(stateMachine.BobrDeathState);
     }
 }

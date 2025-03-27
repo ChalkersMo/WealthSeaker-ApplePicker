@@ -4,6 +4,7 @@ public abstract class DamageDealer : MonoBehaviour
 {
     [SerializeField] protected int Rank;
     [SerializeField] protected float Damage;
+    [SerializeField] protected float attackTime;
     [SerializeField] protected float reloadTime;
     [SerializeField] protected string animationName;
 
@@ -29,7 +30,8 @@ public abstract class DamageDealer : MonoBehaviour
             _collider.enabled = true;
             playerAnimController.PlayByName(
                 animationName, new SHG.AnimatorCoder.AnimationData(SHG.AnimatorCoder.Animations.RESET), 0.2f, 1);
-            Invoke(nameof(EndOfAttack), reloadTime);
+            Invoke(nameof(ReadyForAttack), reloadTime);
+            Invoke(nameof(EndOfAttack), attackTime);
         }    
     }
 
@@ -45,12 +47,16 @@ public abstract class DamageDealer : MonoBehaviour
         }
     }
 
+    protected virtual void ReadyForAttack()
+    {
+        isAttackReady = true;
+    }
+
     protected virtual void EndOfAttack()
     {
         if (_collider.enabled)
         {
            _collider.enabled = false;
-        }
-        isAttackReady = true;
+        }      
     }
 }

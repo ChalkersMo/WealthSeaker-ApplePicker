@@ -33,6 +33,10 @@ public class AttacksController : MonoBehaviour
             if (currentDamageDealer != null)
                 currentDamageDealer.gameObject.SetActive(false);
 
+            if(currentDamageDealer == damageDealers[name])
+            {
+                currentDamageDealer.gameObject.SetActive(false);
+            }
             currentDamageDealer = damageDealers[name];
             currentDamageDealer.gameObject.SetActive(true);
         }
