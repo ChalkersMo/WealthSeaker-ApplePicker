@@ -21,7 +21,7 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private float turnSmoothTime = 0.1f;
 
     private float turnSmoothVelocity;
-    private float gravity = -9.81f;
+    private float gravity = -9.81f * 7;
 
     private CharacterController controller;
     private Vector3 velocity;

@@ -5,7 +5,7 @@ public class PlayerAnimationController : AnimatorCoder
 {
     private Animator _animator;
     private string lastAnimationName;
-    void Start()
+    void Awake()
     {
         _animator = GetComponentInChildren<Animator>();
         Initialize(_animator);
