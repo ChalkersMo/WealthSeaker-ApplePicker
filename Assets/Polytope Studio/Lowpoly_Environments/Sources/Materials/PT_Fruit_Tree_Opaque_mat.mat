@@ -105,7 +105,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _SNOWONOFF: 0
-    - _Smoothness: 0.384
+    - _Smoothness: 0.363
     - _SmoothnessTextureChannel: 0
     - _SnowAmount: 1
     - _SnowCoverage: 0.45
@@ -125,7 +125,7 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GroundColor: {r: 0.02641511, g: 0.010491282, b: 0.008721967, a: 1}
-    - _TopColor: {r: 0.07924521, g: 0.0443485, b: 0.025567792, a: 1}
+    - _GroundColor: {r: 0.20754719, g: 0.0863083, b: 0.05599857, a: 1}
+    - _TopColor: {r: 0.16226411, g: 0.08871536, b: 0.056027032, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
